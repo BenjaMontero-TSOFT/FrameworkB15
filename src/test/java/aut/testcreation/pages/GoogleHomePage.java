@@ -13,24 +13,24 @@ public class GoogleHomePage extends SeleniumWrapper {
     }
 
     //locators
-    By barraBusquedaLocator = By.name("q");
-    By btnBuscarConGoogleLocator = By.name("btnK");
-    By btnVoyATenerSuerteLocator = By.name("btnI");
-
-    //methods
-    public void buscarConBotonBuscar(String busqueda){
-        write(busqueda,barraBusquedaLocator);
-        click(btnBuscarConGoogleLocator);
-    }
-
-    public void buscarConBotonVoyATenerSuerte(String busqueda){
-        write(busqueda,barraBusquedaLocator);
-        click(btnVoyATenerSuerteLocator);
-    }
-
-    public void navegarAlHome(){
-        navigateTo(BASE_URL_AUT);
-    }
+//    By barraBusquedaLocator = By.name("q");
+//    By btnBuscarConGoogleLocator = By.name("btnK");
+//    By btnVoyATenerSuerteLocator = By.name("btnI");
+//
+//    //methods
+//    public void buscarConBotonBuscar(String busqueda){
+//        write(busqueda,barraBusquedaLocator);
+//        click(btnBuscarConGoogleLocator);
+//    }
+//
+//    public void buscarConBotonVoyATenerSuerte(String busqueda){
+//        write(busqueda,barraBusquedaLocator);
+//        click(btnVoyATenerSuerteLocator);
+//    }
+//
+//    public void navegarAlHome(){
+//        navigateTo(BASE_URL_AUT);
+//    }
 
 
 }
