@@ -12,7 +12,7 @@ import java.util.Properties;
 public class SeleniumTestBase {
 
     private DriverFactory driverFactory;
-    WebDriver driver;
+    public WebDriver driver;
     static Properties properties;
 
     @BeforeAll

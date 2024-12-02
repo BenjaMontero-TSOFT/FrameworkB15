@@ -6,14 +6,15 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePage extends SeleniumWrapper {
 
-    private SearchNavigationHomePage searchNavigationHomePage;
+    private SearchNavigationHome searchNavigationHome;
 
     public HomePage(WebDriver driver){
         super(driver);
-        this.searchNavigationHomePage = new SearchNavigationHomePage(driver);
         PageFactory.initElements(driver, this);
-        PageFactory.initElements(driver, searchNavigationHomePage);
+
     }
 
-
+    public void setSearchNavigation(SearchNavigationHome value){
+        this.searchNavigationHome = value;
+    }
 }

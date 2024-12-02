@@ -3,18 +3,14 @@ package aut.testcreation.pages;
 import framework.engine.selenium.SeleniumWrapper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class SearchNavigationHomePage extends SeleniumWrapper {
+public class SearchNavigationHome extends SeleniumWrapper {
 
-    @FindBy(xpath = "//Button[@aria-label='Hoteles']")
-    private WebElement btnHotel;
 
-    @FindBy(xpath = "//Button[@aria-label='Buscar alojamiento en']")
-    private WebElement inputSearchMean;
 
     @FindBy(xpath = "//Button[@aria-label='¿Cuándo?']")
     private WebElement btnDates;
@@ -43,23 +39,16 @@ public class SearchNavigationHomePage extends SeleniumWrapper {
     @FindBy(xpath = "//span[@role='alert' and @class='d-t1bnmf']")
     private WebElement alertMessage;
 
-    public SearchNavigationHomePage(WebDriver driver) {
+    public SearchNavigationHome(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
-    void moveSearchNavigationToHotel(){
-        this.clickToElementClickable(this.btnHotel);
-    }
-
-    void insertMean(String text){
-        this.sendKeysToElementVisible(this.inputSearchMean, text);
-    }
-
-    void openDates(){
+    public void openDates(){
         this.clickToElementClickable(this.btnDates);
     }
 
-    void selectDates(String firstDate, String secondDate){
+    public void selectDates(String firstDate, String secondDate){
         //itero y selecciono el btn que contenga el nro del dia que me llega por parametro
         for(WebElement btnDate : this.btnsFirstDates){
             if(this.getTextByElement(btnDate).equalsIgnoreCase(firstDate)){
@@ -77,19 +66,19 @@ public class SearchNavigationHomePage extends SeleniumWrapper {
         }
     }
 
-    void moveToDatesFlexibles(){
+    public void moveToDatesFlexibles(){
         this.clickToElementClickable(this.btnDatesFlexible);
     }
 
-    void selectFourToSixNigths(){
+    public void selectFourToSixNigths(){
         this.clickToElementClickable(this.btnFourToSixNigths);
     }
 
-    void search(){
+    public void search(){
         this.clickToElementClickable(this.btnSearch);
     }
 
-    void getAlertMessage(){
+    public void getAlertMessage(){
         this.getTextByElement(this.alertMessage);
     }
 
