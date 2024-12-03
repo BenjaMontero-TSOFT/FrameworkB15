@@ -11,13 +11,13 @@ import java.util.List;
 public class SearchNavigationTrenes extends SearchNavigationHome {
 
     @FindBy(id = ":R5kd9dalamt2mm:")
-    private WebElement origin;
+    private WebElement itemOrigin;
 
     @FindBy(xpath = "//li[@id='listbox-option-25']")
     private WebElement itemMadrid;
 
     @FindBy(id = ":R6kd9dalamt2mm:")
-    private WebElement destination;
+    private WebElement itemDestination;
 
     @FindBy(xpath = "//li[@id='listbox-option-6']")
     private WebElement itemBilbao;
@@ -31,18 +31,38 @@ public class SearchNavigationTrenes extends SearchNavigationHome {
     @FindBy(xpath = "//button[@aria-label='Reducir el número de adultos']")
     private WebElement subtractPeople;
 
-    public void selectOrigin(){
-        this.clickToElementClickable(this.origin);
-        this.clickToElementClickable(this.itemMadrid);
-        /*List<WebElement> options = driver.findElements(By.cssSelector("ul[role='listbox'] li"));
+    @FindBy(xpath = "//ul[@id=':R5kd9dalamt2mmH2:']")
+    private WebElement listJourneyOrigin;
 
-        for (WebElement option : options) {
-            System.out.println(option.getText());
-        }*/
+    @FindBy(xpath = "//ul[@id=':R6kd9dalamt2mmH2:']")
+    private WebElement listJourneyDestination;
+
+    public void journeyOriginOption(String origin){
+        this.clickToElementClickable(this.itemOrigin);
+        List<WebElement> listItems = listJourneyOrigin.findElements(By.tagName("li"));
+
+        for (WebElement item : listItems) {
+            String itemText = item.findElement(By.tagName("span")).getText();
+
+            if (itemText.equals(origin)) {
+                this.clickToElementClickable(item);
+                return;
+            }
+        }
     }
-    public void selectDestination(){
-        this.clickToElementClickable(this.destination);
-        this.clickToElementClickable(this.itemBilbao);
+
+    public void journeyDestinationOption(String origin){
+        this.clickToElementClickable(this.itemDestination);
+        List<WebElement> listItems = listJourneyDestination.findElements(By.tagName("li"));
+
+        for (WebElement item : listItems) {
+            String itemText = item.findElement(By.tagName("span")).getText();
+
+            if (itemText.equals(origin)) {
+                this.clickToElementClickable(item);
+                return;
+            }
+        }
     }
     public void selectPeople(int peopleNumber){
         this.clickToElementClickable(this.people);
@@ -50,7 +70,6 @@ public class SearchNavigationTrenes extends SearchNavigationHome {
             this.clickToElementClickable(this.addPeople);
         }
     }
-
     public SearchNavigationTrenes(WebDriver driver) {
         super(driver);
     }

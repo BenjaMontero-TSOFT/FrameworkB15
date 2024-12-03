@@ -3,11 +3,16 @@ package aut.testcreation.pages.hotel;
 import aut.testcreation.pages.FormContact;
 import framework.engine.selenium.SeleniumWrapper;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class ReserveHotelPage extends SeleniumWrapper {
 
     private FormContact formContact;
+    @FindBy(xpath = "//h3[@data-testid='contact-form-title']")
+    public WebElement titleFormContact;
+
 
     public ReserveHotelPage(WebDriver driver) {
         super(driver);
@@ -22,6 +27,7 @@ public class ReserveHotelPage extends SeleniumWrapper {
         this.formContact.completeInputEmail(email);
         this.formContact.completeInputPrefijo(prefijo);
         this.formContact.completeInputTel(tel);
+        this.clickToElementClickable(this.titleFormContact);
     }
 
     public String getMessageTelError(){
