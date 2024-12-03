@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class FormContact extends SeleniumWrapper {
 
     @FindBy(xpath = "//input[@name='name']")
@@ -15,13 +17,17 @@ public class FormContact extends SeleniumWrapper {
     public WebElement inputSurname;
     @FindBy(xpath = "//input[@name='email']")
     public WebElement inputEmail;
-    @FindBy(id = "select-field-search-input-7222")
-    public WebElement inputPrefijo;
-    @FindBy(xpath = "//input[@name='name']")
+    @FindBy(xpath = "//button[@data-testid='phone_isoCode']")
+    public WebElement btnShowPrefijo;
+    @FindBy(xpath = "//input[@name='phone']")
     public WebElement inputTel;
-    @FindBy(xpath = "//div[@date-testid='next-phone-input-group-errormessage']")
+    @FindBy(xpath = "//div[@data-testid='next-phone-input-group-errormessage']")
     public WebElement messageTelError;
+//    @FindBy(xpath = "//li[@data-testid='menu-item']")
+//    public List<WebElement> optionCountryPrefijo;
 
+    @FindBy(xpath = "//input[@aria-label='search-input']")
+    public WebElement inputInsertPrefijo;
 
     public FormContact(WebDriver driver){
         super(driver);
@@ -44,8 +50,9 @@ public class FormContact extends SeleniumWrapper {
     }
 
     public void completeInputPrefijo(String value) {
-        this.sendKeysToElementVisible(this.inputPrefijo, value);
-        this.sendKeysToElementVisible(this.inputPrefijo, Keys.ENTER);
+        this.clickElementByJavaScript(this.btnShowPrefijo);
+        this.sendKeysToElementVisible(this.inputInsertPrefijo, value);
+        this.sendKeysToElementVisible(this.inputInsertPrefijo, Keys.ENTER);
     }
 
     public void completeInputTel(String value) {

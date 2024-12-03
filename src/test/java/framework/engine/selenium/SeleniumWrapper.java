@@ -31,6 +31,10 @@ public class SeleniumWrapper {
         return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
     }
 
+    protected void sumbitForm(WebElement element){
+        wait.until(ExpectedConditions.visibilityOf(element)).submit();
+    }
+
     protected void sendKeysToElementVisible(WebElement element, Keys value){
         wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(value);
     }

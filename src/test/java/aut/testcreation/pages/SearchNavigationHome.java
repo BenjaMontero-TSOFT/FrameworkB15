@@ -10,8 +10,6 @@ import java.util.List;
 
 public class SearchNavigationHome extends SeleniumWrapper {
 
-
-
     @FindBy(xpath = "//Button[@aria-label='¿Cuándo?']")
     private WebElement btnDates;
 
@@ -27,7 +25,7 @@ public class SearchNavigationHome extends SeleniumWrapper {
     @FindBy(xpath = "//Button[@aria-label='Aumentar el número de adultos']")
     private WebElement btnUploadQuantityOfAdults;
 
-    @FindBy(xpath = "//Button[@aria-label='Buscar']")
+    @FindBy(xpath = "//form[@aria-label='Hoteles']//button[@aria-label='Buscar']")
     private WebElement btnSearch;
 
     @FindBy(xpath = "//button[text()='Fechas Flexibles']")
@@ -45,7 +43,7 @@ public class SearchNavigationHome extends SeleniumWrapper {
     }
 
     public void openDates(){
-        this.clickToElementClickable(this.btnDates);
+        this.clickElementByJavaScript(this.btnDates);
     }
 
     public void selectDates(String firstDate, String secondDate){
@@ -70,12 +68,16 @@ public class SearchNavigationHome extends SeleniumWrapper {
         this.clickToElementClickable(this.btnDatesFlexible);
     }
 
+    public void clickPersonsOptions(){
+        this.clickElementByJavaScript(this.btnPersonsToRoom);
+    }
+
     public void selectFourToSixNigths(){
         this.clickToElementClickable(this.btnFourToSixNigths);
     }
 
     public void search(){
-        this.clickToElementClickable(this.btnSearch);
+        this.clickElementByJavaScript(this.btnSearch);
     }
 
     public void getAlertMessage(){
