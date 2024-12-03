@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SeleniumWrapper {
 
-    private final WebDriver driver;
+    protected final WebDriver driver;
     private WebDriverWait wait;
 
     //Constructor Base
