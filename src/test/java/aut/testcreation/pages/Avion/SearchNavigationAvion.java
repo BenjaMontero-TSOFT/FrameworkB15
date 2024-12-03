@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactoryFinder;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchNavigationAvion extends SearchNavigationHome {
 
@@ -30,11 +31,11 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     @FindBy (xpath = "//input[@id=':R15l56dalbldq3mm:']")
     private WebElement origen;
 
-    @FindBy (xpath = " //input[@id=':R16l56dalbldq3mm:']")
+    @FindBy (xpath = "//input[@id=':R16l56dalbldq2mm:']")
     private WebElement destino;
 
     @FindBy (xpath = "//ul[@role='listbox']")
-    private ArrayList<WebElement> opciones;
+    private List<WebElement> opciones;
 
     @FindBy (xpath = "//button[@aria-label='Buscar']")
     private WebElement search;
@@ -47,12 +48,14 @@ public class SearchNavigationAvion extends SearchNavigationHome {
         PageFactory.initElements(driver, this);
     }
 
-    public void fillFlightSearch_IdaVuelta(String origenValue, String destinoValue, String metodo, String fehcaIda, String fechaVuelta){
+    public void fillFlightSearch_IdaVuelta_Hotel(String origenValue, String destinoValue, String metodo, String fehcaIda, String fechaVuelta){
         selectedOptionPaymentMethod(metodo);
         clickToElementClickable(IdaYVuelta);
         sendKeysToElementVisible(origen, origenValue);
         sendKeysToElementVisible(destino, destinoValue);
         selectDates(fehcaIda, fechaVuelta);
+        clickToElementClickable(addHotel);
+        clickToElementClickable(search);
     }
 
     public void fillFlightSearch_Ida(String origenValue, String destinoValue, String metodo, String fehcaIda, Integer people){

@@ -48,7 +48,7 @@ public class SearchNavigationHome extends SeleniumWrapper {
     private WebElement alertMessage;
 
     @FindBy (xpath = "//ul[@class='d-5wyavi']")
-    private ArrayList<WebElement> childrenAgeList;
+    private List<WebElement> childrenAgeList;
 
     public SearchNavigationHome(WebDriver driver) {
         super(driver);

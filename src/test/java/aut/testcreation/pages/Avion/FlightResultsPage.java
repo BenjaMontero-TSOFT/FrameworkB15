@@ -10,8 +10,12 @@ public class FlightResultsPage extends SearchNavigationHome {
     @FindBy (xpath = "//div[@class='trip-collection-view__trips-container-top']//button")
     private WebElement selectedFlightButton;
 
+    @FindBy (xpath = "//button[@data-testid='lmn-ds-btn']")
+    private WebElement confirmFlight;
+
     public void selectFlight(){
         clickToElementClickable(selectedFlightButton);
+        clickToElementClickable(confirmFlight);
     }
 
     public FlightResultsPage(WebDriver driver, WebElement selectedFlightButton) {
