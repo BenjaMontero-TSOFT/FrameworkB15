@@ -32,7 +32,7 @@ public class passengerData extends FormContact{
     private WebElement dayPassenger3;
     @FindBy(xpath = "//input[@value='10']")
     private WebElement dayPassenger4;
-    //(//span[@class='FormFieldstyles__LabelText-sc-1pt5zgp-0 hAXCiV'][text()='Día'])[1]
+
     public passengerData(WebDriver driver) {
         super(driver);
     }
