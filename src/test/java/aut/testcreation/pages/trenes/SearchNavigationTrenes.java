@@ -1,6 +1,6 @@
 package aut.testcreation.pages.trenes;
 
-import aut.testcreation.pages.SearchNavigationHomePage;
+import aut.testcreation.pages.SearchNavigationHome;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class SearchNavigationTrenes extends SearchNavigationHomePage {
+public class SearchNavigationTrenes extends SearchNavigationHome {
 
     @FindBy(id = ":R5kd9dalamt2mm:")
     private WebElement origin;
@@ -30,6 +30,26 @@ public class SearchNavigationTrenes extends SearchNavigationHomePage {
 
     @FindBy(xpath = "//button[@aria-label='Reducir el número de adultos']")
     private WebElement subtractPeople;
+
+    public void selectOrigin(){
+        this.clickToElementClickable(this.origin);
+        this.clickToElementClickable(this.itemMadrid);
+        /*List<WebElement> options = driver.findElements(By.cssSelector("ul[role='listbox'] li"));
+
+        for (WebElement option : options) {
+            System.out.println(option.getText());
+        }*/
+    }
+    public void selectDestination(){
+        this.clickToElementClickable(this.destination);
+        this.clickToElementClickable(this.itemBilbao);
+    }
+    public void selectPeople(int peopleNumber){
+        this.clickToElementClickable(this.people);
+        for(int i = 0; i < peopleNumber ; i++ ){
+            this.clickToElementClickable(this.addPeople);
+        }
+    }
 
     public SearchNavigationTrenes(WebDriver driver) {
         super(driver);

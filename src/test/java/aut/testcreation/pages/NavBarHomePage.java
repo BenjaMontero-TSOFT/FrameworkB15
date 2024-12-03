@@ -15,6 +15,13 @@ public class NavBarHomePage extends SeleniumWrapper {
     @FindBy(xpath = "//div[contains(text(),'Trenes')]")
     private WebElement itemTrenes;
 
+    public void selectVerMas(){
+        this.clickToElementClickable(this.itemVermas);
+    }
+    public void selectTrenesSection(){
+        this.clickToElementClickable(this.itemTrenes);
+    }
+
     public NavBarHomePage(WebDriver driver) {
         super(driver);
     }
