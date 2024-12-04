@@ -4,7 +4,6 @@ import aut.testcreation.pages.Avion.FlightResultsPage;
 import aut.testcreation.pages.Avion.SearchNavigationAvion;
 import aut.testcreation.pages.HomePage;
 import framework.engine.selenium.SeleniumTestBase;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +37,7 @@ public class TestVuelos extends SeleniumTestBase {
         this.homePage.closeCookies();
 
         searchAvion = new SearchNavigationAvion(this.driver);
-        searchAvion.fillFlightSearch_Ida("Buenos Aires (BUE)", "Madrid (MAD)", "American Express", "12", 1);
+        searchAvion.fillFlightSearch_IdaVuelta_Hotel("Buenos Aires (BUE)", "Madrid (MAD)", "American Express", "12", "20");
         searchAvion.AmountOfBabysWrong("Bebé, 0-11 meses");
 
     }

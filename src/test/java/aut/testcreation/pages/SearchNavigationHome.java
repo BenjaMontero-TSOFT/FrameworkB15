@@ -12,7 +12,7 @@ import java.util.List;
 
 public class SearchNavigationHome extends SeleniumWrapper {
 
-    @FindBy(xpath = "//Button[@aria-label='¿Cuándo?']")
+    @FindBy(xpath = "//div[@aria-label='Vuelos']//button[@aria-label='¿Cuándo?']")
     private WebElement btnDates;
 
     @FindBy(xpath = "//div[@class='d-b1sfx4']/*[2]//button[@tabindex='-1']")
@@ -68,6 +68,8 @@ public class SearchNavigationHome extends SeleniumWrapper {
 
     public void selectDates(String firstDate, String secondDate){
         //itero y selecciono el btn que contenga el nro del dia que me llega por parametro
+        openDates();
+
         for(WebElement btnDate : this.btnsFirstDates){
             if(this.getTextByElement(btnDate).equalsIgnoreCase(firstDate)){
                 this.clickToElementClickable(btnDate);

@@ -53,13 +53,13 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     }
 
     public void fillFlightSearch_IdaVuelta_Hotel(String origenValue, String destinoValue, String metodo, String fehcaIda, String fechaVuelta) throws InterruptedException {
-        Thread.sleep(1000);
-        clickToElementClickable(IdaYVuelta);
+        //Thread.sleep(1000);
+        //clickToElementClickable(IdaYVuelta);
         selectedOptionPaymentMethod(metodo);
         sendKeysToElementVisible(origen, origenValue);
         sendKeysToElementVisible(destino, destinoValue);
         selectDates(fehcaIda, fechaVuelta);
-        clickToElementClickable(addHotel);
+        //clickToElementClickable(addHotel);
     }
 
     public void clickBuscar(){
