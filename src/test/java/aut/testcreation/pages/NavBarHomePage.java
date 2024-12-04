@@ -4,15 +4,16 @@ import framework.engine.selenium.SeleniumWrapper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
 public class NavBarHomePage extends SeleniumWrapper {
 
-    @FindBy(xpath = "//p[contains(text(),'Ver m')]")
+    @FindBy(xpath = "//p[.='Ver más']")
     private WebElement itemVermas;
 
-    @FindBy(xpath = "//div[contains(text(),'Trenes')]")
+    @FindBy(xpath = "//div[.='Trenes']")
     private WebElement itemTrenes;
 
     public void selectVerMas(){
@@ -24,5 +25,6 @@ public class NavBarHomePage extends SeleniumWrapper {
 
     public NavBarHomePage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 }

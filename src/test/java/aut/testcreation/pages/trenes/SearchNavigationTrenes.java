@@ -22,20 +22,26 @@ public class SearchNavigationTrenes extends SearchNavigationHome {
     @FindBy(xpath = "//li[@id='listbox-option-6']")
     private WebElement itemBilbao;
 
-    @FindBy(xpath = "//span[@class='d-glv9jj'][text()='1 pasajero · Cualquier clase']")
+    @FindBy(xpath = "//span[@class='d-glv9jj']")
     private WebElement people;
 
-    @FindBy(xpath = "//button[@aria-label='Aumentar el número de adultos']")
+    @FindBy(xpath = "//div[@class='d-1ea2lc2']/button[2]")
     private WebElement addPeople;
 
-    @FindBy(xpath = "//button[@aria-label='Reducir el número de adultos']")
+    @FindBy(xpath = "//div[@class='d-1ea2lc2']/button[1]")
     private WebElement subtractPeople;
+
+    @FindBy(xpath = "//span[@class='d-vuw68f']")
+    private WebElement numberPeople;
 
     @FindBy(xpath = "//ul[@id=':R5kd9dalamt2mmH2:']")
     private WebElement listJourneyOrigin;
 
     @FindBy(xpath = "//ul[@id=':R6kd9dalamt2mmH2:']")
     private WebElement listJourneyDestination;
+
+    @FindBy(xpath = "//button[@class='d-1qoyuz']")
+    private WebElement btnSearch;
 
     public void journeyOriginOption(String origin){
         this.clickToElementClickable(this.itemOrigin);
@@ -65,12 +71,23 @@ public class SearchNavigationTrenes extends SearchNavigationHome {
         }
     }
     public void selectPeople(int peopleNumber){
-        this.clickToElementClickable(this.people);
-        for(int i = 0; i < peopleNumber ; i++ ){
-            this.clickToElementClickable(this.addPeople);
+        int number = 0;
+        this.clickElementByJavaScript(this.people);
+        for(int i = 0; number != peopleNumber ; i++ ){
+            number = Integer.parseInt(this.numberPeople.getText());
+            if(number > peopleNumber){
+                this.clickToElementClickable(this.subtractPeople);
+            }
+            if(number < peopleNumber){
+                this.clickToElementClickable(this.addPeople);
+            }
         }
     }
     public SearchNavigationTrenes(WebDriver driver) {
         super(driver);
+    }
+
+    public void clickSearch(){
+        this.clickToElementClickable(btnSearch);
     }
 }

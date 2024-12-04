@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class passengerData extends FormContact{
+public class FormPassengerData extends FormContact{
 
     @FindBy(xpath = "//input[@name='groups.1.travellers.1.name']")
     private WebElement namePassenger1;
@@ -33,7 +33,7 @@ public class passengerData extends FormContact{
     @FindBy(xpath = "//input[@value='10']")
     private WebElement dayPassenger4;
 
-    public passengerData(WebDriver driver) {
+    public FormPassengerData(WebDriver driver) {
         super(driver);
     }
 }
