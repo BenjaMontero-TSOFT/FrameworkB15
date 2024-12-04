@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +78,8 @@ public class SearchNavigationHome extends SeleniumWrapper {
     }
 
     public void selectDate(String date){
+        openDates();
+
         //itero y selecciono el btn que contenga el nro del dia que me llega por parametro
         for(WebElement btnDate : this.btnsFirstDates){
             if(this.getTextByElement(btnDate).equalsIgnoreCase(date)){
@@ -87,7 +90,7 @@ public class SearchNavigationHome extends SeleniumWrapper {
     }
 
     public void selectPeople(int peopleNumber){
-        this.clickToElementClickable(this.people);
+        //this.clickToElementClickable(this.people);
         for(int i = 0; i < peopleNumber ; i++ ){
             this.clickToElementClickable(this.addPeople);
         }
