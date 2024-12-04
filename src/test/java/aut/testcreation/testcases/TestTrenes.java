@@ -38,15 +38,18 @@ public class TestTrenes extends SeleniumTestBase {
         searchNavigationTrenes.journeyOriginOption("Madrid");
         searchNavigationTrenes.journeyDestinationOption("Bilbao");
         searchNavigationTrenes.selectDates("25","5");
+        searchNavigationTrenes.clickPersonsOptions();
         searchNavigationTrenes.selectPeople(4);
         searchNavigationTrenes.clickSearch();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         filtersJourney.selectJourney();
+        Thread.sleep(2000);
         filtersJourney.selectBtn();
+        Thread.sleep(2000);
         formContact.completeInputName("Gonzalo");
         formContact.completeInputSurname("Acevedo");
         formContact.completeInputEmail("useruser12@gmail.com");
-        formContact.completeInputPrefijo("CL");
+        formContact.completeInputPrefijo("+54");
         formContact.completeInputTel("3834230988");
 
     }

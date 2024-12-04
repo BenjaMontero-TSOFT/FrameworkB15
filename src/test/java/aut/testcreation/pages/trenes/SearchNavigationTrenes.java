@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
@@ -22,18 +23,6 @@ public class SearchNavigationTrenes extends SearchNavigationHome {
     @FindBy(xpath = "//li[@id='listbox-option-6']")
     private WebElement itemBilbao;
 
-    @FindBy(xpath = "//span[@class='d-glv9jj']")
-    private WebElement people;
-
-    @FindBy(xpath = "//div[@class='d-1ea2lc2']/button[2]")
-    private WebElement addPeople;
-
-    @FindBy(xpath = "//div[@class='d-1ea2lc2']/button[1]")
-    private WebElement subtractPeople;
-
-    @FindBy(xpath = "//span[@class='d-vuw68f']")
-    private WebElement numberPeople;
-
     @FindBy(xpath = "//ul[@id=':R5kd9dalamt2mmH2:']")
     private WebElement listJourneyOrigin;
 
@@ -42,6 +31,9 @@ public class SearchNavigationTrenes extends SearchNavigationHome {
 
     @FindBy(xpath = "//button[@class='d-1qoyuz']")
     private WebElement btnSearch;
+
+    @FindBy(xpath = "//span[@class='d-glv9jj']")
+    private WebElement people;
 
     public void journeyOriginOption(String origin){
         this.clickToElementClickable(this.itemOrigin);
@@ -70,21 +62,14 @@ public class SearchNavigationTrenes extends SearchNavigationHome {
             }
         }
     }
-    public void selectPeople(int peopleNumber){
-        int number = 0;
+
+    public void clickPersonsOptions(){
         this.clickElementByJavaScript(this.people);
-        for(int i = 0; number != peopleNumber ; i++ ){
-            number = Integer.parseInt(this.numberPeople.getText());
-            if(number > peopleNumber){
-                this.clickToElementClickable(this.subtractPeople);
-            }
-            if(number < peopleNumber){
-                this.clickToElementClickable(this.addPeople);
-            }
-        }
     }
+
     public SearchNavigationTrenes(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     public void clickSearch(){

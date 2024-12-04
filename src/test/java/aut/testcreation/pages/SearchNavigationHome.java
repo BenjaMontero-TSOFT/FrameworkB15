@@ -24,19 +24,13 @@ public class SearchNavigationHome extends SeleniumWrapper {
     private WebElement btnPersonsToRoom;
 
     @FindBy(xpath = "//Button[@aria-label='Aumentar el número de adultos']")
-    private WebElement btnUploadQuantityOfAdults;
+    protected WebElement btnUploadQuantityOfAdults;
 
     @FindBy(xpath = "//form[@aria-label='Hoteles']//button[@aria-label='Buscar']")
     private WebElement btnSearch;
 
     @FindBy(xpath = "//button[text()='Fechas Flexibles']")
     private WebElement btnDatesFlexible;
-
-    @FindBy(xpath = "//span[@class='d-glv9jj'][text()='1 pasajero · Cualquier clase']")
-    private WebElement people;
-
-    @FindBy(xpath = "//button[@aria-label='Aumentar el número de adultos']")
-    private WebElement addPeople;
 
     @FindBy (xpath = "//button[@aria-label='Aumentar el número de niños']")
     private WebElement sumaMenor;
@@ -49,6 +43,12 @@ public class SearchNavigationHome extends SeleniumWrapper {
 
     @FindBy (xpath = "//ul[@class='d-5wyavi']")
     private List<WebElement> childrenAgeList;
+
+    @FindBy(xpath = "//span[@class='d-vuw68f']")
+    protected WebElement numberPeople;
+
+    @FindBy(xpath = "//Button[@aria-label='Reducir el número de adultos']")
+    protected WebElement btnDegradeQuantityOfAdults;
 
     public SearchNavigationHome(WebDriver driver) {
         super(driver);
@@ -85,11 +85,17 @@ public class SearchNavigationHome extends SeleniumWrapper {
             }
         }
     }
-
     public void selectPeople(int peopleNumber){
-        this.clickToElementClickable(this.people);
-        for(int i = 0; i < peopleNumber ; i++ ){
-            this.clickToElementClickable(this.addPeople);
+        int number = 0;
+        //this.clickElementByJavaScript(this.btnPersonsToRoom);
+        for(int i = 0; number != peopleNumber ; i++ ){
+            number = Integer.parseInt(this.numberPeople.getText());
+            if(number > peopleNumber){
+                this.clickToElementClickable(this.btnDegradeQuantityOfAdults);
+            }
+            if(number < peopleNumber){
+                this.clickToElementClickable(this.btnUploadQuantityOfAdults);
+            }
         }
     }
 
