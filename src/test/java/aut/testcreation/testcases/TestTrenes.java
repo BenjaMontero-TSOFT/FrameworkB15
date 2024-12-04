@@ -24,7 +24,7 @@ public class TestTrenes extends SeleniumTestBase {
     public void reservaTrenPagoViajeTitularInvalido() throws InterruptedException{
         this.driver.get("https://www.rumbo.es/");
         this.homePage = new HomePage(driver);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         this.homePage.closeCookies();
         this.navBarHomePage = new NavBarHomePage(driver);
         this.searchNavigationTrenes = new SearchNavigationTrenes(driver);
@@ -41,16 +41,17 @@ public class TestTrenes extends SeleniumTestBase {
         searchNavigationTrenes.clickPersonsOptions();
         searchNavigationTrenes.selectPeople(4);
         searchNavigationTrenes.clickSearch();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         filtersJourney.selectJourney();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         filtersJourney.selectBtn();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         formContact.completeInputName("Gonzalo");
         formContact.completeInputSurname("Acevedo");
         formContact.completeInputEmail("useruser12@gmail.com");
         formContact.completeInputPrefijo("+54");
         formContact.completeInputTel("3834230988");
+        formPassengerData.completeFormPassenger1("Gonzalo","Acevedo","10","marzo","2000","39090453");
 
     }
 }
