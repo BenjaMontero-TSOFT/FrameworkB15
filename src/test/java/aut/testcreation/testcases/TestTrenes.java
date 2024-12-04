@@ -31,7 +31,7 @@ public class TestTrenes extends SeleniumTestBase {
         this.filtersJourney = new FiltersJourney(driver);
         this.formContact = new FormContact(driver);
         this.formPassengerData = new FormPassengerData(driver);
-        this.formPaymentData = new FormPaymentData();
+        this.formPaymentData = new FormPaymentData(driver);
 
         navBarHomePage.selectVerMas();
         navBarHomePage.selectTrenesSection();

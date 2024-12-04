@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FiltersOfHotel extends SeleniumWrapper {
 
-    @FindBy(id = "Pill-PropertyTypeContainer")
+    @FindBy(xpath = "//div[@id='Pill-PropertyTypeContainer']")
     private WebElement typeOfMean;
 
     @FindBy(id = "exp_elem_accomodation_type_1")
@@ -54,6 +54,18 @@ public class FiltersOfHotel extends SeleniumWrapper {
         }
         //aplico los nuevos filtros
         this.clickToElementClickable(btnApply);
+    }
+
+    public void selectOrderByPriceAsc(){
+        this.clickToElementClickable(this.btnOrder);
+        this.clickToElementClickable(this.optionOrderPriceAsc);
+        //this.clickToElementClickable(this.btnApply);
+    }
+
+    public void selectTypeOfMeanToHotel(){
+        this.clickElementByJavaScript(this.typeOfMean);
+        this.clickElementByJavaScript(this.optionHotelOfTypeOfMean);
+        this.clickToElementClickable(this.btnApply);
     }
 
 

@@ -21,8 +21,9 @@ public class SearchNavigationHome extends SeleniumWrapper {
     @FindBy(xpath = "//div[@class='d-b1sfx4']/*[3]//button[@tabindex='-1']")
     private List<WebElement> btnsSecondDates;
 
-    @FindBy(xpath = "//div[@class='d-k7h9p']")
+    @FindBy(xpath = "//form[@aria-label='Hoteles']/div/div[3]")
     private WebElement btnPersonsToRoom;
+    //TODO: Revisar xpath domingo
 
     @FindBy(xpath = "//Button[@aria-label='Aumentar el número de adultos']")
     protected WebElement btnUploadQuantityOfAdults;
@@ -30,7 +31,7 @@ public class SearchNavigationHome extends SeleniumWrapper {
     @FindBy(xpath = "//form[@aria-label='Hoteles']//button[@aria-label='Buscar']")
     private WebElement btnSearch;
 
-    @FindBy(xpath = "//button[text()='Fechas Flexibles']")
+    @FindBy(xpath = "//button[text()='Fechas flexibles']")
     private WebElement btnDatesFlexible;
 
     @FindBy(xpath = "//span[@class='d-glv9jj'][text()='1 pasajero · Cualquier clase']")
@@ -42,16 +43,19 @@ public class SearchNavigationHome extends SeleniumWrapper {
     @FindBy (xpath = "//button[@aria-label='Aumentar el número de niños']")
     private WebElement sumaMenor;
 
-    @FindBy (xpath = "//div[@class='d-uc5a44']//button[text()='4-6 noches']")
+    @FindBy (xpath = "//button[text()='4-6 noches']")
     private WebElement btnFourToSixNigths;
 
-    @FindBy (xpath = "//span[@role='alert' and @class='d-t1bnmf']")
+    @FindBy (xpath = "//button[text()='Añadir habitación']")
+    private WebElement btnAddRoom;
+
+    @FindBy (xpath = "//span[@role='alert']")
     private WebElement alertMessage;
 
     @FindBy (xpath = "//li[text()='Bebé, 0-11 meses']")
     private WebElement BtnBabyOption;
 
-    @FindBy(xpath = "//span[@class='d-vuw68f']")
+    @FindBy(xpath = "//div[button[@aria-label='Reducir el número de adultos']]//span")
     protected WebElement numberPeople;
 
     @FindBy(xpath = "//Button[@aria-label='Reducir el número de adultos']")
@@ -121,7 +125,7 @@ public class SearchNavigationHome extends SeleniumWrapper {
     }
 
     public void clickPersonsOptions(){
-        this.clickElementByJavaScript(this.btnPersonsToRoom);
+        this.clickToElementClickable(this.btnPersonsToRoom);
     }
 
     public void selectFourToSixNigths(){
@@ -132,8 +136,12 @@ public class SearchNavigationHome extends SeleniumWrapper {
         this.clickElementByJavaScript(this.btnSearch);
     }
 
-    public void getAlertMessage(){
-        this.getTextByElement(this.alertMessage);
+    public String getAlertMessage(){
+        return this.getTextByElement(this.alertMessage);
+    }
+
+    public void addRoom(){
+        this.clickToElementClickable(this.btnAddRoom);
     }
 
 

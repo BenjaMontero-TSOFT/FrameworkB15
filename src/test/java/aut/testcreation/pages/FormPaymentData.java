@@ -1,14 +1,23 @@
 package aut.testcreation.pages;
 
+import framework.engine.selenium.SeleniumWrapper;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class FormPaymentData {
+import java.util.List;
+
+public class FormPaymentData extends SeleniumWrapper {
 
     @FindBy(xpath = "//input[@name='creditCard.cardNumber']")
     private WebElement inputNumberCreditCard;
-    @FindBy(id = "select-field-search-input-7377")
-    private WebElement inputMonthCreditCard;
+    @FindBy(xpath = "//button[@data-testid='creditCard.expirationDate']")
+    private List<WebElement> buttonsOfYearAndMonth;
+    @FindBy(xpath = "//li[@data-testid='menu-item']")
+    private List<WebElement> itemsYearOrMonth;
+    @FindBy(xpath = "//button[data-testid='creditCard.expirationDate']")
+    private WebElement buttonInputYear;
     @FindBy(id = "select-field-search-input-4743")
     private WebElement inputYearCreditCard;
     @FindBy(xpath = "//input[@name='creditCard.cvv']")
@@ -17,4 +26,42 @@ public class FormPaymentData {
     private WebElement messageCvvError;
 
 
+
+    public FormPaymentData(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
+    }
+
+    public void insertNumberOfCreditCard(String value){
+        this.sendKeysToElementVisible(this.inputNumberCreditCard, value);
+    }
+
+    public void insertMonth(String value){
+        this.clickToElementClickable(this.buttonsOfYearAndMonth.get(0));
+        this.selectValueOptionOfYearOrMonth(value);
+    }
+
+    private void selectValueOptionOfYearOrMonth(String value){
+        for(WebElement element : this.itemsYearOrMonth ){
+            String text = this.getTextByElement(element);
+            String parseToLowerCase = text.toLowerCase();
+            if(parseToLowerCase.contains(value.toLowerCase())){
+                this.clickToElementClickable(element);
+                break;
+            }
+        }
+    }
+
+    public void insertYear(String value){
+        this.clickToElementClickable(this.buttonsOfYearAndMonth.get(1));
+        this.selectValueOptionOfYearOrMonth(value);
+    }
+
+    public void insertCvv(String number){
+        this.sendKeysToElementVisible(this.inputCvvCreditCard, number);
+    }
+
+    public String getMessageCvvError(){
+        return this.getTextByElement(this.messageCvvError);
+    }
 }
