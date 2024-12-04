@@ -80,8 +80,8 @@ public class SearchNavigationAvion extends SearchNavigationHome {
 
     public void AmountOfBabysWrong(String babyAge){
         clickPersonsOptions();
-        addChildren(babyAge);
-        addChildren(babyAge);
+        addBaby(babyAge);
+        addBaby(babyAge);
     }
 
     public void selectedOptionPaymentMethod(String metodo){
