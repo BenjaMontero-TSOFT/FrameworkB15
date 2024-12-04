@@ -67,15 +67,16 @@ public class SeleniumWrapper {
 //        return driver;
 //    }
 
+    public WebElement findElement(By locator){
+        return driver.findElement(locator);
+    }
 
     protected String getFontSize(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element)).getCssValue("font-size");
     }
 
 //    //Wrappers Selenium
-//    public WebElement findElement(By locator){
-//        return driver.findElement(locator);
-//    }
+//
 //
 //    public List<WebElement> findElements (By locator){
 //        return driver.findElements(locator);
@@ -96,20 +97,21 @@ public class SeleniumWrapper {
 //        driver.findElement(locator).click();
 //    }
 //
-//    public Boolean isDisplayed(By locator) {
-//        try {
-//            return driver.findElement(locator).isDisplayed();
-//        } catch (org.openqa.selenium.NoSuchElementException e) {
-//            return false;
-//        }
-//    }
-//    public Boolean isEnabled(By locator) {
-//        try {
-//            return driver.findElement(locator).isEnabled();
-//        } catch (org.openqa.selenium.NoSuchElementException e) {
-//            return false;
-//        }
-//    }
+    public Boolean isDisplayed(By locator) {
+        try {
+            return driver.findElement(locator).isDisplayed();
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+           return false;
+        }
+    }
+
+    public Boolean isEnabled(By locator) {
+        try {
+            return driver.findElement(locator).isEnabled();
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
+    }
 //
 //    public Boolean isSelected(By locator) {
 //        try {

@@ -10,15 +10,17 @@ public class FlightResultsPage extends SearchNavigationHome {
     @FindBy (xpath = "//div[@class='trip-collection-view__trips-container-top']//button")
     private WebElement selectedFlightButton;
 
-    @FindBy (xpath = "//button[@data-testid='lmn-ds-btn']")
+    @FindBy (xpath = "//button[contains(text(), 'Seleccionar')]")
     private WebElement confirmFlight;
 
-    public void selectFlight(){
+    public void selectFlight() throws InterruptedException {
         clickToElementClickable(selectedFlightButton);
+        Thread.sleep(1000);
         clickToElementClickable(confirmFlight);
+        Thread.sleep(2000);
     }
 
-    public FlightResultsPage(WebDriver driver, WebElement selectedFlightButton) {
+    public FlightResultsPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }

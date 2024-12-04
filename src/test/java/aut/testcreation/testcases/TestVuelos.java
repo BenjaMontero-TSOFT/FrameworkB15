@@ -14,7 +14,7 @@ public class TestVuelos extends SeleniumTestBase {
     private HomePage homePage;
 
     @Test
-    @DisplayName("TC001")
+    @DisplayName("TC-V01")
     public void busquedaSimple() throws InterruptedException {
         driver.get("https://www.rumbo.es/");
         this.homePage = new HomePage(this.driver);
@@ -22,7 +22,24 @@ public class TestVuelos extends SeleniumTestBase {
         this.homePage.closeCookies();
 
         searchAvion = new SearchNavigationAvion(this.driver);
+        resultadosVuelos = new FlightResultsPage(this.driver);
 
         searchAvion.fillFlightSearch_Ida("Buenos Aires (BUE)", "Madrid (MAD)", "American Express", "12", 1);
+        searchAvion.clickBuscar();
+        resultadosVuelos.selectFlight();
+    }
+
+    @Test
+    @DisplayName("TC-V02")
+    public void busaquedaFallida_IdaVuelta() throws InterruptedException {
+        driver.get("https://www.rumbo.es/");
+        this.homePage = new HomePage(this.driver);
+        Thread.sleep(2000);
+        this.homePage.closeCookies();
+
+        searchAvion = new SearchNavigationAvion(this.driver);
+        searchAvion.fillFlightSearch_Ida("Buenos Aires (BUE)", "Madrid (MAD)", "American Express", "12", 1);
+        searchAvion.AmountOfBabysWrong("Bebé, 0-11 meses");
+
     }
 }
