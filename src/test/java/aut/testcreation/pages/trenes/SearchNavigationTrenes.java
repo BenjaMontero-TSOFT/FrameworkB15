@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
@@ -22,20 +23,17 @@ public class SearchNavigationTrenes extends SearchNavigationHome {
     @FindBy(xpath = "//li[@id='listbox-option-6']")
     private WebElement itemBilbao;
 
-    @FindBy(xpath = "//span[@class='d-glv9jj'][text()='1 pasajero · Cualquier clase']")
-    private WebElement people;
-
-    @FindBy(xpath = "//button[@aria-label='Aumentar el número de adultos']")
-    private WebElement addPeople;
-
-    @FindBy(xpath = "//button[@aria-label='Reducir el número de adultos']")
-    private WebElement subtractPeople;
-
     @FindBy(xpath = "//ul[@id=':R5kd9dalamt2mmH2:']")
     private WebElement listJourneyOrigin;
 
     @FindBy(xpath = "//ul[@id=':R6kd9dalamt2mmH2:']")
     private WebElement listJourneyDestination;
+
+    @FindBy(xpath = "//button[@class='d-1qoyuz']")
+    private WebElement btnSearch;
+
+    @FindBy(xpath = "//span[@class='d-glv9jj']")
+    private WebElement people;
 
     public void journeyOriginOption(String origin){
         this.clickToElementClickable(this.itemOrigin);
@@ -64,13 +62,17 @@ public class SearchNavigationTrenes extends SearchNavigationHome {
             }
         }
     }
-    public void selectPeople(int peopleNumber){
-        this.clickToElementClickable(this.people);
-        for(int i = 0; i < peopleNumber ; i++ ){
-            this.clickToElementClickable(this.addPeople);
-        }
+
+    public void clickPersonsOptions(){
+        this.clickElementByJavaScript(this.people);
     }
+
     public SearchNavigationTrenes(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
+    }
+
+    public void clickSearch(){
+        this.clickToElementClickable(btnSearch);
     }
 }
