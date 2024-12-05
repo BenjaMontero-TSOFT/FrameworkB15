@@ -72,7 +72,24 @@ public class TestVuelos extends SeleniumTestBase {
         Thread.sleep(2000);
 
         infoHotel.changeFlight();
-        Thread.sleep(10000);
 
     }
+
+    @Test
+    @DisplayName("TC-V04")
+    public void modificarFechas() throws InterruptedException{
+        driver.get("https://www.rumbo.es/");
+        this.homePage = new HomePage(this.driver);
+        this.searchAvion = new SearchNavigationAvion(this.driver);
+        this.hoteles = new SearchedHotelPage(this.driver);
+
+        homePage.closeCookies();
+        searchAvion.fillFlightSearch_IdaVuelta_Hotel("Buenos Aires (BUE)", "Madrid (MAD)", "American Express", "5", "31");
+        searchAvion.addHotel();
+        searchAvion.clickBuscar();
+        Thread.sleep(1000);
+        hoteles.changeDates("13", "20");
+    }
+
+
 }
