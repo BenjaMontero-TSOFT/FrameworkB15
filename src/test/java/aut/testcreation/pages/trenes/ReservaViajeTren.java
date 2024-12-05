@@ -2,6 +2,7 @@ package aut.testcreation.pages.trenes;
 
 import aut.testcreation.pages.*;
 import framework.engine.selenium.SeleniumWrapper;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,12 +18,21 @@ public class ReservaViajeTren extends SeleniumWrapper {
     private FormPassengerData formPassengerData = new FormPassengerData(driver);
     private FormPaymentData formPaymentData = new FormPaymentData(driver);
 
+
     @FindBy(xpath = "//label[@class='insurance__noThanks-radio-label']//input")
     private WebElement btnSecureNoThanks;
 
     @FindBy(xpath = "//button[@data-test='lead-generation-submit-btn']")
     private WebElement btnSiguiente;
 
+    @FindBy(xpath = "//div[@data-test='smart-voucher-title']")
+    private WebElement btnCupon;
+
+    @FindBy(xpath = "//input[@id='voucher']")
+    private WebElement inputCupon;
+
+    @FindBy(xpath = "//button[@data-test='smart-voucher-button']")
+    WebElement btnAplicar;
 
     public void completeFormContact(String name, String surName, String email, String prefijo, String tel){
         formContact.completeInputName(name);
@@ -86,6 +96,19 @@ public class ReservaViajeTren extends SeleniumWrapper {
     public void clickBtnSiguiente(){
         this.clickToElementClickable(btnSiguiente);
     }
+
+    public String titlePageFilterJourney(){
+        //String titlePageFilterJourney = titlePageFilterJourney.getText();
+        return null;
+    }
+
+    public void setCuponDescuento(String value){
+        this.clickElementByJavaScript(btnCupon);
+        this.sendKeysToElementVisible(inputCupon,value);
+        this.sendKeysToElementVisible(inputCupon, Keys.ENTER);
+        this.clickToElementClickable(btnAplicar);
+    }
+
     public ReservaViajeTren(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
