@@ -24,10 +24,7 @@ public class FiltersJourney extends SeleniumWrapper {
     public void selectBtn(){
         this.clickToElementClickable(btnSelect);
     }
-    public void completeSelectJourney(){
-        selectJourney();
-        selectBtn();
-    }
+
     public FiltersJourney(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);

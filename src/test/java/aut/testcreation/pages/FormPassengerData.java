@@ -77,22 +77,9 @@ public class FormPassengerData extends FormContact{
     @FindBy(xpath = "//span[@class='MenuItemstyles__Label-sc-fguzn7-1 eALBLu']")
     private WebElement monthSelect;
 
-    @FindBy(xpath = "//label[@class='insurance__noThanks-radio-label']//input")
-    private WebElement btnSecureNoThanks;
-
-    @FindBy(xpath = "//button[@data-test='lead-generation-submit-btn']")
-    private WebElement btnSiguiente;
 
     //Passenger 1
-    public void completeFormPassenger(String gender,String name, String surName, String day, String month, String years, String documentType) throws InterruptedException {
-        completeInputGenderPassenger(gender);
-        completeInputNamePassenger(name);
-        completeInputSurNamePassenger(surName);
-        completeInputDayPassenger(day);
-        completeInputMonthPassenger(month);
-        completeInputYearsPassenger(years);
-        completeInputDocumentType(documentType);
-    }
+
     public void completeInputGenderPassenger(String gender){
         if(gender.equalsIgnoreCase("Sr")){
             this.clickElementByJavaScript(genderList.get(0));
@@ -137,15 +124,7 @@ public class FormPassengerData extends FormContact{
         return null;
     }
     //Passenger 2
-    public void completeFormPassenger2(String gender, String name, String surName, String day, String month, String years, String documentType) throws InterruptedException {
-        completeInputGenderPassenger2(gender);
-        completeInputNamePassenger2(name);
-        completeInputSurNamePassenger2(surName);
-        completeInputDayPassenger2(day);
-        completeInputMonthPassenger2(month);
-        completeInputYearsPassenger2(years);
-        completeInputDocumentType2(documentType);
-    }
+
     public void completeInputGenderPassenger2(String gender){
         if(gender.equalsIgnoreCase("Sr")){
             this.clickElementByJavaScript(genderList2.get(0));
@@ -190,13 +169,7 @@ public class FormPassengerData extends FormContact{
         return null;
     }
 
-    public void secureNoThanks(){
-        this.clickElementByJavaScript(btnSecureNoThanks);
-    }
 
-    public void clickBtnSiguiente(){
-        this.clickToElementClickable(btnSiguiente);
-    }
     public FormPassengerData(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
