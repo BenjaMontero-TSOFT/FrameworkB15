@@ -60,6 +60,14 @@ public class FormContact extends SeleniumWrapper {
         this.sendKeysToElementVisible(this.inputTel, Keys.ENTER);
     }
 
+    public void completeFormContact(String name, String surName, String email, String prefijo, String tel){
+        completeInputName(name);
+        completeInputSurname(surName);
+        completeInputEmail(email);
+        completeInputPrefijo(prefijo);
+        completeInputTel(tel);
+    }
+
     public String getMessageTelError() {
         return this.getTextByElement(this.messageTelError);
     }
