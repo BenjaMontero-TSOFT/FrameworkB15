@@ -51,7 +51,7 @@ public class FormContact extends SeleniumWrapper {
 
     public void completeInputPrefijo(String value) {
         this.clickElementByJavaScript(this.btnShowPrefijo);
-        this.sendKeysToElementVisible(this.inputInsertPrefijo, value);
+        this.sendKeysToElementVisible(this.inputInsertPrefijo, "+"+value);
         this.sendKeysToElementVisible(this.inputInsertPrefijo, Keys.ENTER);
     }
 
