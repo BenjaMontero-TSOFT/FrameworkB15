@@ -66,6 +66,7 @@ public class SearchNavigationHome extends SeleniumWrapper {
         PageFactory.initElements(driver, this);
     }
 
+
     public void openDates(){
         this.clickElementByJavaScript(this.btnDates);
     }

@@ -94,13 +94,12 @@ public class SearchNavigationAvion extends SearchNavigationHome {
         this.clickToElementClickable(MetodoDePago);
         //itero para comparar el texto de cada una de las opciones
         By byLocator = By.xpath("//ul[@role='listbox']//li[text()='"+metodo+"']");
-
+ /*
         if (isDisplayed(byLocator)){
             WebElement elemento = findElement(byLocator);
             clickToElementClickable(elemento);
         }
-
-        /*for (WebElement option : opciones){
+        for (WebElement option : opciones){
             //obtengo el texto del servicio
             //String textOfOption = this.getTextByElement(option);
             String textOfOption = option.getText();

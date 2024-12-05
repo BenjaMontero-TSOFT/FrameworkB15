@@ -23,6 +23,11 @@ public class NavBarHomePage extends SeleniumWrapper {
         this.clickToElementClickable(this.itemTrenes);
     }
 
+    public void selectSectionTrenes(){
+        selectVerMas();
+        selectTrenesSection();
+    }
+
     public NavBarHomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);

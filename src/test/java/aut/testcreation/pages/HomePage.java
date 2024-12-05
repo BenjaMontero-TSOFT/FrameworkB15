@@ -17,7 +17,9 @@ public class HomePage extends SeleniumWrapper {
 
     public void closeCookies(){
         try {
-            this.clickToElementClickable(this.btnCookies);
+            if(btnCookies.isDisplayed()){
+                this.clickToElementClickable(this.btnCookies);
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

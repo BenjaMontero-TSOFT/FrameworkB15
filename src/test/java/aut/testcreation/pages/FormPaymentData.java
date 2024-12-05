@@ -24,7 +24,10 @@ public class FormPaymentData extends SeleniumWrapper {
     private WebElement inputCvvCreditCard;
     @FindBy(xpath = "//div[@data-testid='creditCard.cvv']//span[@data-testid='input-helper-text']")
     private WebElement messageCvvError;
-
+    @FindBy(xpath = "//input[@name='creditCard.cardHolder']")
+    private WebElement cardHolder;
+    @FindBy(xpath = "//div[@data-testid='creditCard.cardHolder']//span[@data-testid='input-helper-text']")
+    private WebElement messageErrorCardHolder;
 
 
     public FormPaymentData(WebDriver driver) {
@@ -63,5 +66,17 @@ public class FormPaymentData extends SeleniumWrapper {
 
     public String getMessageCvvError(){
         return this.getTextByElement(this.messageCvvError);
+    }
+
+    public void insertCardHolder(String holder){
+        this.sendKeysToElementVisible(this.cardHolder, holder);
+    }
+
+    public boolean messageInvalidCardHolderError(){
+        String message = this.messageErrorCardHolder.getText();
+        if(message.equalsIgnoreCase("Titular invalido")){
+            return true;
+        }
+        else return false;
     }
 }

@@ -11,6 +11,9 @@ import java.util.List;
 
 public class SearchNavigationTrenes extends SearchNavigationHome {
 
+    @FindBy(xpath = "//button[@aria-label='¿Cuándo?']")
+    private WebElement btnDatesTren;
+
     @FindBy(id = ":R5kd9dalamt2mm:")
     private WebElement itemOrigin;
 
@@ -67,12 +70,25 @@ public class SearchNavigationTrenes extends SearchNavigationHome {
         this.clickElementByJavaScript(this.people);
     }
 
-    public SearchNavigationTrenes(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
+    public void completeSearchJourney(String origin, String destination,String dateIda, String dateVuelta){
+        journeyOriginOption(origin);
+        journeyDestinationOption(destination);
+        selectDates(dateIda,dateVuelta);
+        clickPersonsOptions();
+        selectPeople(2);
+        clickSearch();
     }
 
     public void clickSearch(){
         this.clickToElementClickable(btnSearch);
+    }
+
+    public void openDates(){
+        this.clickElementByJavaScript(btnDatesTren);
+    }
+
+    public SearchNavigationTrenes(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
     }
 }
