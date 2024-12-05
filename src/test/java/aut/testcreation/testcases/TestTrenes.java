@@ -33,25 +33,23 @@ public class TestTrenes extends SeleniumTestBase {
         this.formPassengerData = new FormPassengerData(driver);
         this.formPaymentData = new FormPaymentData(driver);
 
-        navBarHomePage.selectVerMas();
-        navBarHomePage.selectTrenesSection();
-        searchNavigationTrenes.journeyOriginOption("Madrid");
-        searchNavigationTrenes.journeyDestinationOption("Bilbao");
-        searchNavigationTrenes.selectDates("25","5");
-        searchNavigationTrenes.clickPersonsOptions();
-        searchNavigationTrenes.selectPeople(4);
-        searchNavigationTrenes.clickSearch();
-        Thread.sleep(1000);
-        filtersJourney.selectJourney();
-        Thread.sleep(1000);
-        filtersJourney.selectBtn();
-        Thread.sleep(1000);
-        formContact.completeInputName("Gonzalo");
-        formContact.completeInputSurname("Acevedo");
-        formContact.completeInputEmail("useruser12@gmail.com");
-        formContact.completeInputPrefijo("+54");
-        formContact.completeInputTel("3834230988");
-        formPassengerData.completeFormPassenger1("Gonzalo","Acevedo","10","marzo","2000","39090453");
-
+        navBarHomePage.selectSectionTrenes();
+        searchNavigationTrenes.completeSearchJourney("Madrid","Bilbao","25","5");
+        filtersJourney.completeSelectJourney();
+        formContact.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","+54","4567879091");
+        formPassengerData.completeFormPassenger("Sr","UserName","SurNameUser","10","Marzo","2000","39090453");
+        formPassengerData.completeFormPassenger2("Sra","userTwo","suNameUserTwo","15","enero","1995","29087976");
+        formPassengerData.secureNoThanks();
+        formPassengerData.clickBtnSiguiente();
+        Thread.sleep(3000);
+        formPaymentData.insertNumberOfCreditCard("4517629108566275");
+        formPaymentData.insertMonth("02");
+        formPaymentData.insertYear("30");
+        formPaymentData.insertCvv("345");
+        formPaymentData.insertCardHolder("+");
+        if(formPaymentData.messageInvalidCardHolderError()){
+            System.out.println("Test aprobado");
+        }
+        else System.out.println("Test NO aprobado");
     }
 }
