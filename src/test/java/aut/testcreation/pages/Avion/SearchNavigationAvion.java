@@ -19,7 +19,7 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     @FindBy (xpath = "//button[text()='Multidestino']")
     private WebElement MultiDestino;
 
-    @FindBy (xpath = "//input[@id = 'isDpSearch']")
+    @FindBy (xpath = "//input[@type='checkbox']") //input[@id = 'isDpSearch']
     private WebElement addHotel;
 
     @FindBy (xpath = "//span[text()='Método más económico']")
@@ -53,13 +53,18 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     }
 
     public void fillFlightSearch_IdaVuelta_Hotel(String origenValue, String destinoValue, String metodo, String fehcaIda, String fechaVuelta) throws InterruptedException {
-        //Thread.sleep(1000);
-        //clickToElementClickable(IdaYVuelta);
+
         selectedOptionPaymentMethod(metodo);
         sendKeysToElementVisible(origen, origenValue);
         sendKeysToElementVisible(destino, destinoValue);
         selectDates(fehcaIda, fechaVuelta);
+        Thread.sleep(1000);
+
+    }
+
+    public void addHotel(){
         //clickToElementClickable(addHotel);
+        addHotel.click();
     }
 
     public void clickBuscar(){
