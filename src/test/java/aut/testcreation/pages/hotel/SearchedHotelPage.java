@@ -67,7 +67,24 @@ public class SearchedHotelPage extends SeleniumWrapper {
     }
 
     public void changeDates(String fechaIda, String fechaVuelta){
-        clickToElementClickable(changeDatesBtn);
+        clickToElementClickable(changeDatesBtn); //este boton no existe o no lo econtre
+        //div[@role='button'] 1 de 5
+
+        //se podria iterar esos botones, obtener el texto y compararlo con las fechas q ingresaste primero
+
+        //ej 9 dic - 19 dic, pedirle a chat gpt, que te haga un metodo, que en base a ese string, elimine todo
+        //lo que no sea un numero pero que deje el - -> entonces quedaria 9-19
+
+        //text = getTextByElement() obtenes el texto del elemento
+
+        //newText = funcionPedidaAchatGpt()
+
+        //si newText.equals(primerFechaIda + "-" + primerFechaVuelta)
+
+        //ahi le haces click al elemento ese
+
+        //se te despleiga el menu de las fechas normales y ahi seleccionas las nuevas fechas
+        //capaz que podes reutilizar el metodo de selectDates de SearchNavigationHome
         By byIda = By.xpath("//div[@data-date='2024-12-" + fechaIda + "']");
         By byVuelta = By.xpath("//div[@data-date='2024-12-" + fechaVuelta + "']");
         click(byIda);

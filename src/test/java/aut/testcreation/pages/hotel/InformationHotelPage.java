@@ -14,7 +14,7 @@ public class InformationHotelPage extends SeleniumWrapper {
     @FindBy (xpath = "//button[@data-test-id='book-cta']")
     private WebElement btnNavigateToReserve;
 
-    @FindBy(xpath = "//div[@id='rooms']//button[@data-testid=\"checkout-button\"]")
+    @FindBy(xpath = "//div[@id='rooms']//button[@data-testid='checkout-button']")
     private List<WebElement> btnContinueToReserve;
 
     @FindBy (xpath = "//div[@aria-label='go to change flight']")

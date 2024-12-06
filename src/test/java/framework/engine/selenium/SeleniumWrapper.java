@@ -58,6 +58,11 @@ public class SeleniumWrapper {
         js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
+    protected void scrollForPixelInElement(Integer value, WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollTop +="+value.toString()+";", element);
+    }
+
     protected void switchTab(){
         Object[] windowHandles=driver.getWindowHandles().toArray();
         driver.switchTo().window((String) windowHandles[1]);

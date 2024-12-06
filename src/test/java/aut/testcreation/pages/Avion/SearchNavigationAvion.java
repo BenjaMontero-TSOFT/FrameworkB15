@@ -67,8 +67,8 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     }
 
     public void addHotel(){
-        //clickToElementClickable(addHotel);
-        addHotel.click();
+        clickToElementClickable(addHotel);
+        //addHotel.click();
     }
 
     public void clickBuscar(){

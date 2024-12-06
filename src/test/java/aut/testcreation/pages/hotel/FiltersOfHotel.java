@@ -42,7 +42,8 @@ public class FiltersOfHotel extends SeleniumWrapper {
         PageFactory.initElements(driver, this);
     }
 
-    public void selectedOptionsServices(String[] values){
+    public void selectedOptionsServices(String[] values) throws InterruptedException {
+        Thread.sleep(5000);
         //despliego los servicios
         this.clickToElementClickable(btnServices);
         //itero para comparar el texto de cada una de las opciones de los servicios

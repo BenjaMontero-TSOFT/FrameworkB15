@@ -39,7 +39,7 @@ public class TestVuelos extends SeleniumTestBase {
         searchAvion = new SearchNavigationAvion(this.driver);
         resultadosVuelos = new FlightResultsPage(this.driver);
 
-        searchAvion.fillFlightSearch_Ida("Buenos Aires (BUE)", "Madrid (MAD)", "American Express", "12", 1);
+        searchAvion.fillFlightSearch_Ida(dataSet.get(1), dataSet.get(2), dataSet.get(3), dataSet.get(4), Integer.parseInt(dataSet.get(5)));
         searchAvion.clickBuscar();
         resultadosVuelos.selectFlight();
     }
@@ -53,8 +53,8 @@ public class TestVuelos extends SeleniumTestBase {
         this.homePage.closeCookies();
 
         searchAvion = new SearchNavigationAvion(this.driver);
-        searchAvion.fillFlightSearch_IdaVuelta_Hotel("Buenos Aires (BUE)", "Madrid (MAD)", "American Express", "12", "20");
-        searchAvion.AmountOfBabysWrong("Bebé, 0-11 meses");
+        searchAvion.fillFlightSearch_IdaVuelta_Hotel(dataSet.get(1), dataSet.get(2), dataSet.get(3), dataSet.get(4), dataSet.get(5));
+        searchAvion.AmountOfBabysWrong(dataSet.get(6));
 
     }
 
@@ -71,7 +71,7 @@ public class TestVuelos extends SeleniumTestBase {
         this.homePage.closeCookies();
 
         searchAvion = new SearchNavigationAvion(this.driver);
-        searchAvion.fillFlightSearch_IdaVuelta_Hotel("Buenos Aires (BUE)", "Madrid (MAD)", "American Express", "12", "2");
+        searchAvion.fillFlightSearch_IdaVuelta_Hotel(dataSet.get(1), dataSet.get(2), dataSet.get(3), dataSet.get(4), dataSet.get(5));
         searchAvion.addHotel();
         searchAvion.clickBuscar();
 
@@ -94,7 +94,7 @@ public class TestVuelos extends SeleniumTestBase {
         this.hoteles = new SearchedHotelPage(this.driver);
 
         homePage.closeCookies();
-        searchAvion.fillFlightSearch_IdaVuelta_Hotel("Buenos Aires (BUE)", "Madrid (MAD)", "American Express", "5", "31");
+        searchAvion.fillFlightSearch_IdaVuelta_Hotel(dataSet.get(1), dataSet.get(2), dataSet.get(3), dataSet.get(4), dataSet.get(5));
         searchAvion.addHotel();
         searchAvion.clickBuscar();
         Thread.sleep(1000);
@@ -132,18 +132,18 @@ public class TestVuelos extends SeleniumTestBase {
         fee.selectFee();
 
         //Formulario
-        reserveFlight.completeFormContact( "Asdasd", "Asdasd", "agustinvillanaon@gmail.com", "+54", "1121856755");
-        reserveFlight.fillFlightForm("1", "Asdasd", "Asdasd", "13", "enero", "1989");
-        reserveFlight.fillFlightForm("2", "eeeeee", "rrrrrrrrrr", "14", "febrero", "1999");
-        reserveFlight.fillAddressData("Avenida TSOFT", "1234", "2234", "Madrid");
+        reserveFlight.completeFormContact( dataSet.get(1), dataSet.get(2), dataSet.get(3), dataSet.get(4), dataSet.get(5));
+        reserveFlight.fillFlightForm(dataSet.get(6), dataSet.get(7), dataSet.get(8), dataSet.get(9), dataSet.get(10), dataSet.get(11));
+        reserveFlight.fillFlightForm(dataSet.get(12), dataSet.get(13), dataSet.get(14), dataSet.get(15), dataSet.get(16), dataSet.get(17));
+        reserveFlight.fillAddressData(dataSet.get(18), dataSet.get(19), dataSet.get(20), dataSet.get(21));
         reserveFlight.siguiente();
         //Asientos y datos de pago
         seatReservation.seatAdvice();
         seatReservation.skipStep();
         seatReservation.goToPaymentPage();
-        reserveFlight.completeFormPayment("4445 8889 4448 9999", "enero", "25", "4444");
+        reserveFlight.completeFormPayment(dataSet.get(22), dataSet.get(23), dataSet.get(24), dataSet.get(25));
         String messageError = this.reserveFlight.getMessageCvvError();
-        Assertions.assertEquals(messageError, "Introduce los 3 dígitos del código CVV de tu tarjeta.");
+        Assertions.assertEquals(messageError, dataSet.get(26));
     }
 
     @Test
@@ -163,15 +163,15 @@ public class TestVuelos extends SeleniumTestBase {
         homePage.closeCookies();
 
         navBar.granCanariaNavBar();
-        searchAvion.selectDatesGC("15", "21");
+        searchAvion.selectDatesGC(dataSet.get(1), dataSet.get(2));
         searchAvion.clickBuscarGranCanaria();
         hotelFiltro.StarsFilter();
         hoteles.goToFirstResult();
         infoHotel.goToReserve();
         infoHotel.continueToReserveToFirstOption();
         fee.selectExtraPackFee();
-        reserveFlight.completeFormContact("Domingo", "Saavedra", "agustinvilla5678@gmail.com", "+54", "1121856755");
-        reserveFlight.fillFlightForm("1", "Domingo", "Saavedra", "14", "", "2000");
+        reserveFlight.completeFormContact(dataSet.get(3), dataSet.get(4), dataSet.get(5), dataSet.get(6), dataSet.get(7));
+        reserveFlight.fillFlightForm(dataSet.get(8), dataSet.get(9), dataSet.get(10), dataSet.get(11), "", dataSet.get(12));
 
     }
 
