@@ -17,6 +17,9 @@ public class SearchNavigationHome extends SeleniumWrapper {
     @FindBy(xpath = "//div[@aria-label='Vuelos']//button[@aria-label='¿Cuándo?']")
     private WebElement btnDates;
 
+    @FindBy (xpath = "//div[@aria-label='Vuelo + Hotel']//button[@aria-label='¿Cuándo?']")
+    private WebElement fechasVueloHotelGC;
+
     @FindBy(xpath = "//div[@class='d-b1sfx4']/*[2]//button[@tabindex='-1']")
     private List<WebElement> btnsFirstDates;
 
@@ -63,33 +66,41 @@ public class SearchNavigationHome extends SeleniumWrapper {
     @FindBy (xpath = "//Button[@aria-label='Reducir el número de adultos']")
     protected WebElement btnDegradeQuantityOfAdults;
 
-    @FindBy (xpath = "//p[text()='Vuelo + Hotel']")
-    private WebElement VuelosHotelNavBarOption;
-
-    @FindBy (xpath = "//div[text()='Flash Sales']")
-    private WebElement FlashSales;
-
     public SearchNavigationHome(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-    }
-
-    public void vuelosFlashSaleNavBar(){
-        //clickToElementClickable(vuelosNavBarOption);
-
-        Actions action = new Actions(driver);
-        action.moveToElement(VuelosHotelNavBarOption).perform();
-
-        clickToElementClickable(FlashSales);
     }
 
     public void openDates(){
         this.clickElementByJavaScript(this.btnDates);
     }
 
+    public void openDatesGC(){
+        this.clickElementByJavaScript(this.fechasVueloHotelGC);
+    }
+
     public void selectDates(String firstDate, String secondDate){
         //itero y selecciono el btn que contenga el nro del dia que me llega por parametro
         openDates();
+
+        for(WebElement btnDate : this.btnsFirstDates){
+            if(this.getTextByElement(btnDate).equalsIgnoreCase(firstDate)){
+                this.clickToElementClickable(btnDate);
+                break;
+            }
+        }
+
+        for(WebElement btnDate : this.btnsSecondDates){
+            if(this.getTextByElement(btnDate).equalsIgnoreCase(secondDate)){
+                this.clickToElementClickable(btnDate);
+                break;
+            }
+        }
+    }
+
+    public void selectDatesGC(String firstDate, String secondDate){
+        //itero y selecciono el btn que contenga el nro del dia que me llega por parametro
+        openDatesGC();
 
         for(WebElement btnDate : this.btnsFirstDates){
             if(this.getTextByElement(btnDate).equalsIgnoreCase(firstDate)){

@@ -1,10 +1,7 @@
 package aut.testcreation.testcases;
 
+import aut.testcreation.pages.*;
 import aut.testcreation.pages.Avion.*;
-import aut.testcreation.pages.FormContact;
-import aut.testcreation.pages.FormPassengerData;
-import aut.testcreation.pages.FormPaymentData;
-import aut.testcreation.pages.HomePage;
 import aut.testcreation.pages.hotel.FiltersOfHotel;
 import aut.testcreation.pages.hotel.InformationHotelPage;
 import aut.testcreation.pages.hotel.ReserveHotelPage;
@@ -23,6 +20,7 @@ public class TestVuelos extends SeleniumTestBase {
     private InformationHotelPage infoHotel;
     private FlashSaleLandingPage flashSale;
     private Fee fee;
+    private NavBarHomePage navBar;
     private FormContact contactData;
     private FormPassengerData passengerData;
     private ReserveFlightPage reserveFlight;
@@ -116,24 +114,30 @@ public class TestVuelos extends SeleniumTestBase {
         this.passengerData = new FormPassengerData(this.driver);
         this.reserveFlight = new ReserveFlightPage(this.driver);
         this.seatReservation = new SeatReservationPage(this.driver);
+        this.navBar = new NavBarHomePage(this.driver);
 
         homePage.closeCookies();
 
-        searchAvion.vuelosFlashSaleNavBar();
+        //Seleccionar FlashSale desde NavBar
+        navBar.vuelosFlashSaleNavBar();
         Thread.sleep(2000);
         flashSale.selectFlashSale();
         Thread.sleep(1000);
 
+        //Confirmacion de hotel
         infoHotel.goToReserve();
         infoHotel.continueToReserveToFirstOption();
 
-        fee.SelectFee();
+        //Tarifa
+        fee.selectFee();
 
+        //Formulario
         reserveFlight.completeFormContact( "Asdasd", "Asdasd", "agustinvillanaon@gmail.com", "+54", "1121856755");
         reserveFlight.fillFlightForm("1", "Asdasd", "Asdasd", "13", "enero", "1989");
         reserveFlight.fillFlightForm("2", "eeeeee", "rrrrrrrrrr", "14", "febrero", "1999");
         reserveFlight.fillAddressData("Avenida TSOFT", "1234", "2234", "Madrid");
         reserveFlight.siguiente();
+        //Asientos y datos de pago
         seatReservation.seatAdvice();
         seatReservation.skipStep();
         seatReservation.goToPaymentPage();
@@ -144,7 +148,30 @@ public class TestVuelos extends SeleniumTestBase {
 
     @Test
     @DisplayName("TC-V06")
-    public void granCanaria(){
+    public void reservaIdaVuelta_Hotel_granCanaria(){
+        driver.get("https://www.rumbo.es/");
+        this.homePage = new HomePage(this.driver);
+        this.navBar = new NavBarHomePage(this.driver);
+        this.searchAvion = new SearchNavigationAvion(this.driver);
+        this.hotelFiltro = new FiltersOfHotel(this.driver);
+        this.hoteles = new SearchedHotelPage(this.driver);
+        this.infoHotel = new InformationHotelPage(this.driver);
+        this.fee = new Fee(this.driver);
+        this.reserveFlight = new ReserveFlightPage(this.driver);
+        this.paymentData = new FormPaymentData(this.driver);
+
+        homePage.closeCookies();
+
+        navBar.granCanariaNavBar();
+        searchAvion.selectDatesGC("15", "21");
+        searchAvion.clickBuscarGranCanaria();
+        hotelFiltro.StarsFilter();
+        hoteles.goToFirstResult();
+        infoHotel.goToReserve();
+        infoHotel.continueToReserveToFirstOption();
+        fee.selectExtraPackFee();
+        reserveFlight.completeFormContact("Domingo", "Saavedra", "agustinvilla5678@gmail.com", "+54", "1121856755");
+        reserveFlight.fillFlightForm("1", "Domingo", "Saavedra", "14", "", "2000");
 
     }
 

@@ -11,15 +11,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Fee extends SeleniumWrapper {
 
     @FindBy (xpath = "//div[@class='sc-hniSVs gDuGna']//button[@data-testid='classic-card-cta']")
-    private WebElement BtnRecommendedFee;
+    private WebElement btnRecommendedFee;
+
+    @FindBy (xpath = "//button[@data-test='travel-pack-fare-button']")
+    private WebElement btnTravelExtra;
 
     public Fee(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public void SelectFee(){
+    public void selectFee(){
         WebDriverWait wait = new WebDriverWait(driver, 20);
-        wait.until(ExpectedConditions.elementToBeClickable(BtnRecommendedFee)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(btnRecommendedFee)).click();
+    }
+
+    public void selectExtraPackFee(){
+        clickToElementClickable(btnTravelExtra);
     }
 }
