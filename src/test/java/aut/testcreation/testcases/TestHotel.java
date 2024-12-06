@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class TestHotel extends SeleniumTestBase {
@@ -83,7 +84,7 @@ public class TestHotel extends SeleniumTestBase {
         //agregar que el home page reciba un search navigation y hacer lo mismo que con el form contact
         this.driver.get("https://www.rumbo.es/");
         this.homePage = new HomePage(this.driver);
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
         this.homePage.closeCookies();
         this.searchNavigationHotel = new SearchNavigationHotel(driver);
         this.searchedHotelPage = new SearchedHotelPage(driver);
@@ -100,7 +101,7 @@ public class TestHotel extends SeleniumTestBase {
 
         this.searchNavigationHotel.search();
 
-        Thread.sleep(2000);
+
         String[] values = {dataSet.get(5), dataSet.get(6)};
         this.filtersOfHotel.selectedOptionsServices(values);
         this.searchedHotelPage.goToFirstResult();
@@ -118,11 +119,11 @@ public class TestHotel extends SeleniumTestBase {
 
     @Test
     @DisplayName("TC-H04")
-    public void reserveHotelNroCvvError() throws InterruptedException {
+    public void reserveHotelNroCvvError() throws InterruptedException, IOException {
         //agregar que el home page reciba un search navigation y hacer lo mismo que con el form contact
         this.driver.get("https://www.rumbo.es/");
         this.homePage = new HomePage(this.driver);
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
         this.homePage.closeCookies();
         this.searchNavigationHotel = new SearchNavigationHotel(driver);
         this.searchedHotelPage = new SearchedHotelPage(driver);
@@ -131,29 +132,29 @@ public class TestHotel extends SeleniumTestBase {
         this.filtersOfHotel = new FiltersOfHotel(driver);
 
         this.searchNavigationHotel.moveSearchNavigationToHotel();
-        this.searchNavigationHotel.insertMean("Barcelona");
+        this.searchNavigationHotel.insertMean(dataSet.get(1));
 
         this.searchNavigationHotel.clickFirstOption();
         this.searchNavigationHotel.openDates();
-        this.searchNavigationHotel.selectDates("25", "5");
+        this.searchNavigationHotel.selectDates(dataSet.get(3), dataSet.get(4));
 
         this.searchNavigationHotel.search();
 
-        Thread.sleep(2000);
-        String[] values = {"Wifi gratis", "Piscina"};
+
+        String[] values = {dataSet.get(5), dataSet.get(6)};
         this.filtersOfHotel.selectedOptionsServices(values);
 
         this.searchedHotelPage.goToFirstResult();
         this.informationHotelPage.goToReserve();
-        this.reserveHotelPage.completeFormContact("Benjamin",
-                "Montero",
-                "benjamontero.contacto@gmail.com",
-                "+54",
-                "2494208260"
+        this.reserveHotelPage.completeFormContact(dataSet.get(7),
+                dataSet.get(8),
+                dataSet.get(9),
+                dataSet.get(10),
+                dataSet.get(11)
         );
-        this.reserveHotelPage.completeFormPayment("4445 8889 4448 9999", "enero", "25", "4444");
+        this.reserveHotelPage.completeFormPayment(dataSet.get(12), dataSet.get(13), dataSet.get(14), dataSet.get(15));
         String messageError = this.reserveHotelPage.getMessageCvvError();
-        Assertions.assertEquals(messageError, "Introduce los 3 dígitos del código CVV de tu tarjeta.");
+        Assertions.assertEquals(messageError, dataSet.get(2));
     }
 
     @Test
@@ -170,11 +171,11 @@ public class TestHotel extends SeleniumTestBase {
         this.reserveHotelPage = new ReserveHotelPage(driver);
 
         this.searchNavigationHotel.moveSearchNavigationToHotel();
-        this.searchNavigationHotel.insertMean("Barcelona");
+        this.searchNavigationHotel.insertMean(dataSet.get(1));
 
         this.searchNavigationHotel.clickFirstOption();
         this.searchNavigationHotel.openDates();
-        this.searchNavigationHotel.selectDates("25", "5");
+        this.searchNavigationHotel.selectDates(dataSet.get(2), dataSet.get(3));
         this.searchNavigationHotel.search();
         Thread.sleep(4000);
         this.searchedHotelPage.goToFirstResult();
@@ -198,16 +199,16 @@ public class TestHotel extends SeleniumTestBase {
         this.reserveHotelPage = new ReserveHotelPage(driver);
 
         this.searchNavigationHotel.moveSearchNavigationToHotel();
-        this.searchNavigationHotel.insertMean("Argentina");
+        this.searchNavigationHotel.insertMean(dataSet.get(1));
 
         this.searchNavigationHotel.clickFirstOption();
         this.searchNavigationHotel.openDates();
-        this.searchNavigationHotel.selectDates("25", "5");
+        this.searchNavigationHotel.selectDates(dataSet.get(2), dataSet.get(3));
         this.searchNavigationHotel.search();
         Thread.sleep(4000);
         this.searchedHotelPage.goToResultByArgentina();
         Thread.sleep(4000);
-        boolean validate = this.searchedHotelPage.titleOfResultContainsText("Argentina");
+        boolean validate = this.searchedHotelPage.titleOfResultContainsText(dataSet.get(1));
         Assertions.assertTrue(validate);
 
     }
