@@ -34,7 +34,7 @@ public class DriverFactory {
                 hiloLocal.set(new ChromeDriver());
                 getDriver().manage().deleteAllCookies();
                 getDriver().manage().window().maximize();
-                getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
                 return getDriver();
             case "edge":
                 WebDriverManager.edgedriver().setup();
