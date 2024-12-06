@@ -23,7 +23,7 @@ public class SeleniumWrapper {
 
     protected void sendKeysToElementVisible(WebElement element, String value){
         wait.until(ExpectedConditions.visibilityOf(element));
-        element.clear();
+        //element.clear();
         element.sendKeys(value);
     }
 

@@ -3,8 +3,10 @@ package aut.testcreation.pages;
 import framework.engine.selenium.SeleniumWrapper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.PageFactoryFinder;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -55,17 +57,31 @@ public class SearchNavigationHome extends SeleniumWrapper {
     @FindBy (xpath = "//li[text()='Bebé, 0-11 meses']")
     private WebElement BtnBabyOption;
 
-    @FindBy(xpath = "//div[button[@aria-label='Reducir el número de adultos']]//span")
+    @FindBy (xpath = "//div[button[@aria-label='Reducir el número de adultos']]//span")
     protected WebElement numberPeople;
 
-    @FindBy(xpath = "//Button[@aria-label='Reducir el número de adultos']")
+    @FindBy (xpath = "//Button[@aria-label='Reducir el número de adultos']")
     protected WebElement btnDegradeQuantityOfAdults;
+
+    @FindBy (xpath = "//p[text()='Vuelo + Hotel']")
+    private WebElement VuelosHotelNavBarOption;
+
+    @FindBy (xpath = "//div[text()='Flash Sales']")
+    private WebElement FlashSales;
 
     public SearchNavigationHome(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
+    public void vuelosFlashSaleNavBar(){
+        //clickToElementClickable(vuelosNavBarOption);
+
+        Actions action = new Actions(driver);
+        action.moveToElement(VuelosHotelNavBarOption).perform();
+
+        clickToElementClickable(FlashSales);
+    }
 
     public void openDates(){
         this.clickElementByJavaScript(this.btnDates);
@@ -101,6 +117,7 @@ public class SearchNavigationHome extends SeleniumWrapper {
             }
         }
     }
+
     public void selectPeople(int peopleNumber){
         int number = 0;
 

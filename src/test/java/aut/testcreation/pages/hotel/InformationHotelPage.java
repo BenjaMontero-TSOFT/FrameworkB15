@@ -11,7 +11,7 @@ import java.util.List;
 
 public class InformationHotelPage extends SeleniumWrapper {
 
-    @FindBy(xpath = "//button[@data-test-id='book-cta']")
+    @FindBy (xpath = "//button[@data-test-id='book-cta']")
     private WebElement btnNavigateToReserve;
 
     @FindBy(xpath = "//div[@id='rooms']//button[@data-testid=\"checkout-button\"]")
@@ -45,7 +45,7 @@ public class InformationHotelPage extends SeleniumWrapper {
     }
 
     //clickeo la primer opcion
-    private void continueToReserveToFirstOption(){
+    public void continueToReserveToFirstOption(){
         for(WebElement webElement: this.btnContinueToReserve){
             this.clickToElementClickable(webElement);
             break;
