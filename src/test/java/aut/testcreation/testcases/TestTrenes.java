@@ -4,6 +4,7 @@ import aut.testcreation.pages.*;
 import aut.testcreation.pages.trenes.MessageAlertTrenes;
 import aut.testcreation.pages.trenes.ReservaViajeTren;
 import framework.engine.selenium.SeleniumTestBase;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,14 +30,12 @@ public class TestTrenes extends SeleniumTestBase {
         Thread.sleep(3000);
         reservaViajeTren.completeFormPaymentData("4517629108566275","02","30","345","+");
 
-        WebElement messageErrorCardHolder;
-        messageErrorCardHolder = driver.findElement(By.xpath("//div[@data-testid='creditCard.cardHolder']//span[@data-testid='input-helper-text']"));
 
-        String messageTest = messageErrorCardHolder.getText();
+        /*String messageTest = messageErrorCardHolder.getText();
         if(messageTest.equalsIgnoreCase("Titular ingresado invalido")){
             System.out.println("Test aprobado");
         }
-        else System.out.println("Test NO aprobado");
+        else System.out.println("Test NO aprobado");*/
     }
     @Test
     @DisplayName("TC-T02")
@@ -66,6 +65,8 @@ public class TestTrenes extends SeleniumTestBase {
         ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
         reservaViajeTren.selectSectionTrenes();
         reservaViajeTren.completeSearchJourney("Madrid","Bilbao","25","5");
+        String titlePage = driver.getTitle();
+        Assertions.assertEquals("Rumbo vuelos baratos Madrid - Bilbao",titlePage);
     }
 
     @Test

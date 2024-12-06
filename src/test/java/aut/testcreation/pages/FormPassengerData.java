@@ -13,6 +13,7 @@ import java.util.List;
 public class FormPassengerData extends FormContact{
 
     //Passenger 1
+    By byName = By.xpath("//input[@name='groups.1.travellers.1.title']");
     @FindBy(xpath = "//input[@name='groups.1.travellers.1.title']")
     private List<WebElement> genderList;
 

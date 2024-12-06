@@ -21,6 +21,13 @@ public class MessageAlertTrenes extends SeleniumWrapper {
     @FindBy(xpath = "//span[@data-testid='creditCard.expirationDate_error']")
     private WebElement messageErrorCardHolder;
 
+    //@FindBy(xpath = "//div[@data-testid='creditCard.cardHolder']//span[@data-testid='input-helper-text']")
+    //private WebElement messageErrorCardHolder;
+
+    public String messageErrorCardHolder(){
+        return null;
+    }
+
     public String errorCuponDescuento(){
         return  messageCuponResult.getText();
     }

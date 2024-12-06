@@ -31,7 +31,7 @@ public class TestHotel extends SeleniumTestBase {
         this.searchNavigationHotel = new SearchNavigationHotel(driver);
 
         this.searchNavigationHotel.moveSearchNavigationToHotel();
-        this.searchNavigationHotel.insertMean("Barcelona");
+        this.searchNavigationHotel.insertMean(dataSet.get(1));
 
         this.searchNavigationHotel.clickFirstOption();
         this.searchNavigationHotel.openDates();
@@ -39,18 +39,10 @@ public class TestHotel extends SeleniumTestBase {
         this.searchNavigationHotel.selectFourToSixNigths();
 
         this.searchNavigationHotel.clickPersonsOptions();
-        this.searchNavigationHotel.selectPeople(2);
+        this.searchNavigationHotel.selectPeople(Integer.parseInt(dataSet.get(2)));
         this.searchNavigationHotel.addRoom();
         String message = this.searchNavigationHotel.getAlertMessage();
-        Assertions.assertTrue(message.equalsIgnoreCase("Si buscas por fechas flexibles, solo puedes añadir 1 habitación. Para añadir más habitaciones, elige fechas exactas."));
-
-//        this.searchNavigationHotel.search();
-//        Thread.sleep(4000);
-//        this.filtersOfHotel.selectTypeOfMeanToHotel();
-//        this.filtersOfHotel.selectOrderByPriceAsc();
-//        Double firstPrice = this.searchedHotelPage.getPriceOfResultOfPositionSearched(0);
-//        Double secondPrice = this.searchedHotelPage.getPriceOfResultOfPositionSearched(1);
-//        Assertions.assertTrue(firstPrice <= secondPrice);
+        Assertions.assertTrue(message.equalsIgnoreCase(dataSet.get(3)));
 
     }
 
@@ -69,11 +61,11 @@ public class TestHotel extends SeleniumTestBase {
         this.filtersOfHotel = new FiltersOfHotel(driver);
 
         this.searchNavigationHotel.moveSearchNavigationToHotel();
-        this.searchNavigationHotel.insertMean("Barcelona");
+        this.searchNavigationHotel.insertMean(dataSet.get(1));
 
         this.searchNavigationHotel.clickFirstOption();
         this.searchNavigationHotel.openDates();
-        this.searchNavigationHotel.selectDates("25", "5");
+        this.searchNavigationHotel.selectDates(dataSet.get(2), dataSet.get(3));
 
         this.searchNavigationHotel.search();
         Thread.sleep(4000);
@@ -100,32 +92,28 @@ public class TestHotel extends SeleniumTestBase {
         this.filtersOfHotel = new FiltersOfHotel(driver);
 
         this.searchNavigationHotel.moveSearchNavigationToHotel();
-        this.searchNavigationHotel.insertMean("Barcelona");
-        //Thread.sleep(2000);
+        this.searchNavigationHotel.insertMean(dataSet.get(1));
+
         this.searchNavigationHotel.clickFirstOption();
         this.searchNavigationHotel.openDates();
-        this.searchNavigationHotel.selectDates("25", "5");
-        //Thread.sleep(5000);
-        //this.searchNavigationHotel.clickPersonsOptions();
+        this.searchNavigationHotel.selectDates(dataSet.get(3), dataSet.get(4));
+
         this.searchNavigationHotel.search();
-        //this.searchNavigationHotel.search();
-        //Thread.sleep(2000);
+
         Thread.sleep(2000);
-        String[] values = {"Wifi gratis", "Piscina"};
+        String[] values = {dataSet.get(5), dataSet.get(6)};
         this.filtersOfHotel.selectedOptionsServices(values);
         this.searchedHotelPage.goToFirstResult();
-        //var value = driver.getCurrentUrl();
-//        Object[] windowHandles=driver.getWindowHandles().toArray();
-//        driver.switchTo().window((String) windowHandles[1]);
+
         this.informationHotelPage.goToReserve();
-        this.reserveHotelPage.completeFormContact("Benjamin",
-                "Montero",
-                "benjamontero.contacto@gmail.com",
-                "+54",
-                "213124414555123123"
+        this.reserveHotelPage.completeFormContact(dataSet.get(7),
+                dataSet.get(8),
+                dataSet.get(9),
+                dataSet.get(10),
+                dataSet.get(11)
                 );
         String messageError = this.reserveHotelPage.getMessageTelError();
-        Assertions.assertEquals(messageError, "Introduce un número de teléfono válido.");
+        Assertions.assertEquals(messageError, dataSet.get(2));
     }
 
     @Test
@@ -144,22 +132,17 @@ public class TestHotel extends SeleniumTestBase {
 
         this.searchNavigationHotel.moveSearchNavigationToHotel();
         this.searchNavigationHotel.insertMean("Barcelona");
-        //Thread.sleep(2000);
+
         this.searchNavigationHotel.clickFirstOption();
         this.searchNavigationHotel.openDates();
         this.searchNavigationHotel.selectDates("25", "5");
-        //Thread.sleep(5000);
-        //this.searchNavigationHotel.clickPersonsOptions();
+
         this.searchNavigationHotel.search();
-        //this.searchNavigationHotel.search();
-        //Thread.sleep(2000);
+
         Thread.sleep(2000);
         String[] values = {"Wifi gratis", "Piscina"};
         this.filtersOfHotel.selectedOptionsServices(values);
 
-        //var value = driver.getCurrentUrl();
-//        Object[] windowHandles=driver.getWindowHandles().toArray();
-//        driver.switchTo().window((String) windowHandles[1]);
         this.searchedHotelPage.goToFirstResult();
         this.informationHotelPage.goToReserve();
         this.reserveHotelPage.completeFormContact("Benjamin",
