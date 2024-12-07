@@ -22,7 +22,7 @@ public class TestTrenes extends SeleniumTestBase {
         reservaViajeTren.selectSectionTrenes();
         reservaViajeTren.completeSearchJourney("Madrid","Bilbao","25","5");
         reservaViajeTren.completeSelectJourney();
-        reservaViajeTren.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","+54","4567879091");
+        reservaViajeTren.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","54","4567879091");
         reservaViajeTren.completeFormPassenger("Sr","UserName","SurNameUser","10","Marzo","2000","39090453");
         reservaViajeTren.completeFormPassenger2("Sra","userTwo","suNameUserTwo","15","enero","1995","29087976");
         reservaViajeTren.secureNoThanks();

@@ -102,7 +102,7 @@ public class FormPassengerData extends FormContact{
     }
     public void completeInputMonthPassenger(String month) throws InterruptedException {
         this.clickElementByJavaScript(this.btnMonth);
-        this.clickToElementClickable(compareMonthPassenger(month));
+        this.clickElementByJavaScript(compareMonthPassenger(month));
     }
     public void completeInputYearsPassenger(String years){
         this.clickElementByJavaScript(yearsPassengerList.get(0));

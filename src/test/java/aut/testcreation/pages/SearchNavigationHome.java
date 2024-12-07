@@ -3,8 +3,10 @@ package aut.testcreation.pages;
 import framework.engine.selenium.SeleniumWrapper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.PageFactoryFinder;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -14,6 +16,9 @@ public class SearchNavigationHome extends SeleniumWrapper {
 
     @FindBy(xpath = "//div[@aria-label='Vuelos']//button[@aria-label='¿Cuándo?']")
     private WebElement btnDates;
+
+    @FindBy (xpath = "//div[@aria-label='Vuelo + Hotel']//button[@aria-label='¿Cuándo?']")
+    private WebElement fechasVueloHotelGC;
 
     @FindBy(xpath = "//div[@class='d-b1sfx4']/*[2]//button[@tabindex='-1']")
     private List<WebElement> btnsFirstDates;
@@ -55,10 +60,10 @@ public class SearchNavigationHome extends SeleniumWrapper {
     @FindBy (xpath = "//li[text()='Bebé, 0-11 meses']")
     private WebElement BtnBabyOption;
 
-    @FindBy(xpath = "//div[button[@aria-label='Reducir el número de adultos']]//span")
+    @FindBy (xpath = "//div[button[@aria-label='Reducir el número de adultos']]//span")
     protected WebElement numberPeople;
 
-    @FindBy(xpath = "//Button[@aria-label='Reducir el número de adultos']")
+    @FindBy (xpath = "//Button[@aria-label='Reducir el número de adultos']")
     protected WebElement btnDegradeQuantityOfAdults;
 
     public SearchNavigationHome(WebDriver driver) {
@@ -66,14 +71,36 @@ public class SearchNavigationHome extends SeleniumWrapper {
         PageFactory.initElements(driver, this);
     }
 
-
     public void openDates(){
         this.clickElementByJavaScript(this.btnDates);
+    }
+
+    public void openDatesGC(){
+        this.clickElementByJavaScript(this.fechasVueloHotelGC);
     }
 
     public void selectDates(String firstDate, String secondDate){
         //itero y selecciono el btn que contenga el nro del dia que me llega por parametro
         openDates();
+
+        for(WebElement btnDate : this.btnsFirstDates){
+            if(this.getTextByElement(btnDate).equalsIgnoreCase(firstDate)){
+                this.clickToElementClickable(btnDate);
+                break;
+            }
+        }
+
+        for(WebElement btnDate : this.btnsSecondDates){
+            if(this.getTextByElement(btnDate).equalsIgnoreCase(secondDate)){
+                this.clickToElementClickable(btnDate);
+                break;
+            }
+        }
+    }
+
+    public void selectDatesGC(String firstDate, String secondDate){
+        //itero y selecciono el btn que contenga el nro del dia que me llega por parametro
+        openDatesGC();
 
         for(WebElement btnDate : this.btnsFirstDates){
             if(this.getTextByElement(btnDate).equalsIgnoreCase(firstDate)){
@@ -101,6 +128,7 @@ public class SearchNavigationHome extends SeleniumWrapper {
             }
         }
     }
+
     public void selectPeople(int peopleNumber){
         int number = 0;
 

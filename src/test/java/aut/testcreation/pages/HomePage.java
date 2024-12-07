@@ -7,8 +7,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class HomePage extends SeleniumWrapper {
-    @FindBy(xpath = "//button[text()='Aceptar todo']")
+    @FindBy(xpath = "//button[contains(@class, 'iubenda-cs-accept-btn')]")
     private WebElement btnCookies;
+
+    @FindBy(xpath = "//h2[@id='iubenda-cs-title']")
+    private WebElement titleCookies;
+
+
 
     public HomePage(WebDriver driver){
         super(driver);
@@ -16,12 +21,8 @@ public class HomePage extends SeleniumWrapper {
     }
 
     public void closeCookies(){
-        try {
-            if(btnCookies.isDisplayed()){
-                this.clickToElementClickable(this.btnCookies);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if(titleCookies.isDisplayed()){
+            this.clickToElementClickable(this.btnCookies);
         }
     }
 }

@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.IOException;
+
 public class ReserveHotelPage extends SeleniumWrapper {
 
     private FormContact formContact;
@@ -27,7 +29,7 @@ public class ReserveHotelPage extends SeleniumWrapper {
         PageFactory.initElements(driver, this);
     }
 
-    public void completeFormContact(String name, String surname, String email, String prefijo, String tel){
+    public void completeFormContact(String name, String surname, String email, String prefijo, String tel) {
         this.formContact.completeInputName(name);
         this.formContact.completeInputSurname(surname);
         this.formContact.completeInputEmail(email);

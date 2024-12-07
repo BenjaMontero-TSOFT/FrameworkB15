@@ -16,6 +16,12 @@ public class FiltersOfHotel extends SeleniumWrapper {
     @FindBy(id = "exp_elem_accomodation_type_1")
     private WebElement optionHotelOfTypeOfMean;
 
+    @FindBy (xpath = "//div[text()='Estrellas']")
+    private WebElement btnStars;
+
+    @FindBy (xpath = "//li[@id='exp_elem_hotel_stars_5']")
+    private WebElement optFiveStarsFilter;
+
     @FindBy(xpath = "//button[text()='Aplicar']")
     private WebElement btnApply;
 
@@ -36,7 +42,8 @@ public class FiltersOfHotel extends SeleniumWrapper {
         PageFactory.initElements(driver, this);
     }
 
-    public void selectedOptionsServices(String[] values){
+    public void selectedOptionsServices(String[] values) throws InterruptedException {
+        Thread.sleep(5000);
         //despliego los servicios
         this.clickToElementClickable(btnServices);
         //itero para comparar el texto de cada una de las opciones de los servicios
@@ -54,6 +61,12 @@ public class FiltersOfHotel extends SeleniumWrapper {
         }
         //aplico los nuevos filtros
         this.clickToElementClickable(btnApply);
+    }
+
+    public void StarsFilter() {
+        clickToElementClickable(btnStars);
+        clickToElementClickable(optFiveStarsFilter);
+        clickToElementClickable(btnApply);
     }
 
     public void selectOrderByPriceAsc(){

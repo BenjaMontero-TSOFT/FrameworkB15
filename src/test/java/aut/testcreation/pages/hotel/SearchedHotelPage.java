@@ -26,6 +26,12 @@ public class SearchedHotelPage extends SeleniumWrapper {
     @FindBy(xpath = "//div[@data-testid='card-container']//span[contains(@class, 'sc-85da2539-5')]")
     private List<WebElement> pricesOfResults;
 
+    @FindBy (xpath = "//div[@id='openx-ui-search']")
+    private WebElement research;
+
+    @FindBy (xpath = "//div[text()='Buscar otras fechas']")
+    private WebElement changeDatesBtn;
+
     public SearchedHotelPage(WebDriver driver) {
         super(driver);
         this.filtersOfHotel = new FiltersOfHotel(driver);
@@ -58,6 +64,32 @@ public class SearchedHotelPage extends SeleniumWrapper {
         }
 
         return false;
+    }
+
+    public void changeDates(String fechaIda, String fechaVuelta){
+        clickToElementClickable(changeDatesBtn); //este boton no existe o no lo econtre
+        //div[@role='button'] 1 de 5
+
+        //se podria iterar esos botones, obtener el texto y compararlo con las fechas q ingresaste primero
+
+        //ej 9 dic - 19 dic, pedirle a chat gpt, que te haga un metodo, que en base a ese string, elimine todo
+        //lo que no sea un numero pero que deje el - -> entonces quedaria 9-19
+
+        //text = getTextByElement() obtenes el texto del elemento
+
+        //newText = funcionPedidaAchatGpt()
+
+        //si newText.equals(primerFechaIda + "-" + primerFechaVuelta)
+
+        //ahi le haces click al elemento ese
+
+        //se te despleiga el menu de las fechas normales y ahi seleccionas las nuevas fechas
+        //capaz que podes reutilizar el metodo de selectDates de SearchNavigationHome
+        By byIda = By.xpath("//div[@data-date='2024-12-" + fechaIda + "']");
+        By byVuelta = By.xpath("//div[@data-date='2024-12-" + fechaVuelta + "']");
+        click(byIda);
+        click(byVuelta);
+        clickToElementClickable(research);
     }
 
 }

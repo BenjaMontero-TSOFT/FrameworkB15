@@ -19,7 +19,7 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     @FindBy (xpath = "//button[text()='Multidestino']")
     private WebElement MultiDestino;
 
-    @FindBy (xpath = "//input[@id = 'isDpSearch']")
+    @FindBy (xpath = "//input[@type='checkbox']") //input[@id = 'isDpSearch']
     private WebElement addHotel;
 
     @FindBy (xpath = "//span[text()='Método más económico']")
@@ -34,11 +34,15 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     @FindBy (xpath = "//div[@aria-label='Vuelos']//button[@aria-label='¿Cuándo?']")
     private WebElement BtnFechaIda;
 
+
     @FindBy (xpath = "//li[@role='option']")
     private List<WebElement> opciones;
 
     @FindBy (xpath = "//button[@aria-label='Buscar']")
     private WebElement search;
+
+    @FindBy (xpath = "//div[@aria-label='Vuelo + Hotel']//button[@aria-label='Buscar']")
+    private WebElement searchGranCanaria;
 
     @FindBy (xpath = "//div[@class='d-rs5dud']//span[@role='alert']")
     private WebElement errorMsg;
@@ -53,17 +57,26 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     }
 
     public void fillFlightSearch_IdaVuelta_Hotel(String origenValue, String destinoValue, String metodo, String fehcaIda, String fechaVuelta) throws InterruptedException {
-        //Thread.sleep(1000);
-        //clickToElementClickable(IdaYVuelta);
+
         selectedOptionPaymentMethod(metodo);
         sendKeysToElementVisible(origen, origenValue);
         sendKeysToElementVisible(destino, destinoValue);
         selectDates(fehcaIda, fechaVuelta);
-        //clickToElementClickable(addHotel);
+        Thread.sleep(1000);
+
+    }
+
+    public void addHotel(){
+        clickToElementClickable(addHotel);
+        //addHotel.click();
     }
 
     public void clickBuscar(){
         clickToElementClickable(search);
+    }
+
+    public void clickBuscarGranCanaria(){
+        clickToElementClickable(searchGranCanaria);
     }
 
     public void fillFlightSearch_Ida(String origenValue, String destinoValue, String metodo, String fehcaIda, Integer people) throws InterruptedException {
