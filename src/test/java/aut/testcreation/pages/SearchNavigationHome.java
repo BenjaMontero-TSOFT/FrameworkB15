@@ -76,7 +76,7 @@ public class SearchNavigationHome extends SeleniumWrapper {
     }
 
     public void openDatesGC(){
-        this.clickElementByJavaScript(this.fechasVueloHotelGC);
+        this.clickToElementClickable(this.fechasVueloHotelGC);
     }
 
     public void selectDates(String firstDate, String secondDate){

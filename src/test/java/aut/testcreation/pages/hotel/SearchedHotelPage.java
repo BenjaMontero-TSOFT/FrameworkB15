@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchedHotelPage extends SeleniumWrapper {
@@ -45,8 +46,9 @@ public class SearchedHotelPage extends SeleniumWrapper {
         return Double.valueOf(number);
     }
 
-    public void goToFirstResult(){
+    public void goToFirstResult() throws InterruptedException {
         WebElement firsResult = this.resultsOfSearched.get(0);
+        Thread.sleep(1000);
         this.clickToElementClickable(firsResult);
         this.switchTab();
     }

@@ -148,7 +148,7 @@ public class TestVuelos extends SeleniumTestBase {
 
     @Test
     @DisplayName("TC-V06")
-    public void reservaIdaVuelta_Hotel_granCanaria(){
+    public void reservaIdaVuelta_Hotel_granCanaria() throws InterruptedException {
         driver.get("https://www.rumbo.es/");
         this.homePage = new HomePage(this.driver);
         this.navBar = new NavBarHomePage(this.driver);
