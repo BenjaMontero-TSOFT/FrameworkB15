@@ -16,6 +16,9 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     @FindBy (xpath = "//button[text()='Solo ida']")
     private WebElement SoloIda;
 
+    @FindBy (xpath = "//form[@aria-label='Vuelos']//div[span[text()='Pasajeros y clase del vuelo']]")
+    private WebElement btnPersons;
+
     @FindBy (xpath = "//button[text()='Multidestino']")
     private WebElement MultiDestino;
 
@@ -50,6 +53,10 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     public SearchNavigationAvion(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+    }
+
+    public void clickPersonsOptions(){
+        this.clickToElementClickable(this.btnPersons);
     }
 
     public void openDates(){
@@ -87,8 +94,8 @@ public class SearchNavigationAvion extends SearchNavigationHome {
         sendKeysToElementVisible(origen, origenValue);
         sendKeysToElementVisible(destino, destinoValue);
         selectDate(fehcaIda);
-        clickPersonsOptions();
-        selectPeople(1);
+        //clickPersonsOptions();
+        selectPeople(people);
     }
 
     public void AmountOfBabysWrong(String babyAge){
