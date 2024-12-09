@@ -98,7 +98,7 @@ public class TestVuelos extends SeleniumTestBase {
         searchAvion.addHotel();
         searchAvion.clickBuscar();
         Thread.sleep(1000);
-        hoteles.changeDates("13", "20");
+        hoteles.changeDates(dataSet.get(4), dataSet.get(5), dataSet.get(6), dataSet.get(7));
     }
 
     @Test
