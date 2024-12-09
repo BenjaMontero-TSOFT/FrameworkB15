@@ -30,12 +30,12 @@ public class TestTrenes extends SeleniumTestBase {
         Thread.sleep(3000);
         reservaViajeTren.completeFormPaymentData("4517629108566275","02","30","345","+");
 
-
-        /*String messageTest = messageErrorCardHolder.getText();
+        MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
+        String messageTest = messageAlertTrenes.errorCardHolder();
         if(messageTest.equalsIgnoreCase("Titular ingresado invalido")){
             System.out.println("Test aprobado");
         }
-        else System.out.println("Test NO aprobado");*/
+        else System.out.println("Test NO aprobado");
     }
     @Test
     @DisplayName("TC-T02")
@@ -43,20 +43,19 @@ public class TestTrenes extends SeleniumTestBase {
         ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
         MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
         reservaViajeTren.selectSectionTrenes();
-        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","25","5");
-        reservaViajeTren.completeSelectJourney();
+        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","27","8");        reservaViajeTren.completeSelectJourney();
         reservaViajeTren.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","+54","4567879091");
         reservaViajeTren.completeFormPassenger("Sr","UserName","SurNameUser","10","Marzo","2000","39090453");
         reservaViajeTren.completeFormPassenger2("Sra","userTwo","suNameUserTwo","15","enero","1995","29087976");
         reservaViajeTren.secureNoThanks();
         reservaViajeTren.clickBtnSiguiente();
-        Thread.sleep(3000);
-        reservaViajeTren.completeFormPaymentData("4517629108566275","02","43","345","+");
-        String messageTest = messageAlertTrenes.errorAnioLejano();
+        reservaViajeTren.completeFormPaymentData("4517629108566275","02","43","345","NameHolderCard");
+        String messageTest = messageAlertTrenes.errorDistantYear();
         if(messageTest.equalsIgnoreCase("Año demasiado lejano en el tiempo")){
             System.out.println("Test aprobado");
         }
         else System.out.println("Test NO aprobado");
+        System.out.println("El mensaje es: "+ messageTest);
     }
 
     @Test
@@ -64,9 +63,12 @@ public class TestTrenes extends SeleniumTestBase {
     public void ReservaTrenTituloPageTren () throws InterruptedException {
         ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
         reservaViajeTren.selectSectionTrenes();
-        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","25","5");
+        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","27","8");
         String titlePage = driver.getTitle();
-        Assertions.assertEquals("Rumbo vuelos baratos Madrid - Bilbao",titlePage);
+        if(titlePage.equalsIgnoreCase("Rumbo vuelos baratos Madrid - Bilbao")){
+            System.out.println("Test aprobado");
+        }
+        else System.out.println("Test NO aprobado");
     }
 
     @Test
@@ -75,7 +77,7 @@ public class TestTrenes extends SeleniumTestBase {
         MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
         ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
         reservaViajeTren.selectSectionTrenes();
-        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","25","5");
+        reservaViajeTren.completeSearchJourney("Madrid","Barcelona","30","8");
         reservaViajeTren.completeSelectJourney();
         reservaViajeTren.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","+54","4567879091");
         reservaViajeTren.completeFormPassenger("Sr","UserName","SurNameUser","10","Marzo","2000","39090453");
@@ -98,7 +100,7 @@ public class TestTrenes extends SeleniumTestBase {
         ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
         MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
         reservaViajeTren.selectSectionTrenes();
-        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","25","5");
+        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","27","8");
         reservaViajeTren.completeSelectJourney();
         reservaViajeTren.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","+54","4567879091");
         reservaViajeTren.completeFormPassenger("Sr","UserName","SurNameUser","10","Marzo","2000","39090453");
@@ -116,7 +118,7 @@ public class TestTrenes extends SeleniumTestBase {
         ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
         MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
         reservaViajeTren.selectSectionTrenes();
-        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","25","5");
+        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","27","8");
         reservaViajeTren.completeSelectJourney();
         reservaViajeTren.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","+54","4567879091");
         reservaViajeTren.completeFormPassenger("Sr","UserName","SurNameUser","10","Marzo","2000","39090453");

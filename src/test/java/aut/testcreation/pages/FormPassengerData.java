@@ -1,6 +1,5 @@
 package aut.testcreation.pages;
 
-import cucumber.api.java.de.Wenn;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +16,44 @@ public class FormPassengerData extends FormContact{
     @FindBy(xpath = "//input[@name='groups.1.travellers.1.title']")
     private List<WebElement> genderList;
 
+
+
+    String numberPerson = "1";
+
+    //Name Passenger xpath
+    String namePassengerText = "//input[@name='groups.1.travellers."+numberPerson+".name']";
+    By byNamePassenger = By.xpath(namePassengerText);
+    private final WebElement namePassenger = driver.findElement(byNamePassenger);
+
+
+    //Surname Passenger xpath
+    String surNamePassengerText = "//input[@name='groups.1.travellers."+numberPerson+".surname']";
+    By bySurNamePassenger = By.xpath(surNamePassengerText);
+    private final WebElement surNamePassenger = driver.findElement(bySurNamePassenger);
+
+    //Day and year of birth Passenger xpath
+    String dateOfBirthText = "//input[@name='groups.1.travellers."+numberPerson+".dateOfBirth']";
+    By byDateOfBirth = By.xpath(dateOfBirthText);
+    private final List<WebElement> dateOfBirth = driver.findElements(byDateOfBirth);
+
+    //
+    String getDateOfBirthMonthPassengerText = "//button[@data-testid='groups.1.travellers."+numberPerson+".dateOfBirth_month']//span[@class='Selectstyles__SelectedOption-sc-d5yk3i-6 btKVzJ']";
+    By getDateOfBirthMonthPassengerBy = By.xpath(getDateOfBirthMonthPassengerText);
+    private WebElement getDateOfBirthMonthPassenger;
+
+    String yearsPassengerListText = "//span[@class='FormFieldstyles__LabelText-sc-1pt5zgp-0 hAXCiV' and text()='Año']";
+    By byYearsPassengerList = By.xpath(yearsPassengerListText);
+    private final List<WebElement> yearsPassengerList = driver.findElements(byYearsPassengerList);
+
+    String btnTypeDocumentPassengerText = "//button[@data-testid='groups.1.travellers."+numberPerson+".documentType']";
+    By byBtnTypeDocumentPassenger = By.xpath(btnTypeDocumentPassengerText);
+    private final WebElement btnTypeDocumentPassenger = driver.findElement(byBtnTypeDocumentPassenger);
+
+    String btnMonthText = "//button[@data-testid='groups.1.travellers."+numberPerson+".dateOfBirth_month']";
+    By byBtnMonthText = By.xpath(btnMonthText);
+    private final WebElement btnMonth = driver.findElement(byBtnMonthText);
+
+    /*
     @FindBy(xpath = "//input[@name='groups.1.travellers.1.name']")
     private WebElement namePassenger;
 
@@ -35,14 +72,15 @@ public class FormPassengerData extends FormContact{
     @FindBy(xpath = "//button[@data-testid='groups.1.travellers.1.documentType']")
     private WebElement btnTypeDocumentPassenger;
 
+        @FindBy(xpath = "//button[@data-testid='groups.1.travellers.1.dateOfBirth_month']")
+    private WebElement btnMonth;
+*/
     @FindBy(xpath = "//span[@class='MenuItemstyles__Label-sc-fguzn7-1 eALBLu' and text()='Pasaporte']")
     private WebElement optionTypeDocumentPassenger;
 
     @FindBy(xpath = "//input[@name='groups.1.travellers.1.documentNumber']")
     private WebElement inputTypeDocumentPassenger;
 
-    @FindBy(xpath = "//button[@data-testid='groups.1.travellers.1.dateOfBirth_month']")
-    private WebElement btnMonth;
 
     //Passenger 2
     @FindBy(xpath = "//input[@name='groups.1.travellers.2.title']")

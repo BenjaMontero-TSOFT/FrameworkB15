@@ -1,8 +1,6 @@
 package aut.testcreation.pages.trenes;
 
-import framework.engine.selenium.SeleniumTestBase;
 import framework.engine.selenium.SeleniumWrapper;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,25 +17,40 @@ public class MessageAlertTrenes extends SeleniumWrapper {
     private WebElement messageAdultoIncorrecto;
 
     @FindBy(xpath = "//span[@data-testid='creditCard.expirationDate_error']")
+    private WebElement messageErrorCardExpiration;
+
+    @FindBy(xpath = "//div[@data-testid='creditCard.cardHolder']//span[@data-testid='input-helper-text']")
     private WebElement messageErrorCardHolder;
 
-    //@FindBy(xpath = "//div[@data-testid='creditCard.cardHolder']//span[@data-testid='input-helper-text']")
-    //private WebElement messageErrorCardHolder;
-
-    public String messageErrorCardHolder(){
-        return null;
+    public String errorCardHolder(){
+        if(messageErrorCardHolder == null){
+            return "";
+        }
+        else return messageErrorCardHolder.getText();
     }
 
     public String errorCuponDescuento(){
-        return  messageCuponResult.getText();
+        if(messageCuponResult == null){
+            return "";
+        }
+        else {
+            return messageCuponResult.getText();}
     }
 
     public String errorPassengerEdad(){
-        return this.messageAdultoIncorrecto.getText();
+        if(messageAdultoIncorrecto == null){
+            return "";
+        }
+        else {
+            return messageAdultoIncorrecto.getText();}
     }
 
-    public String errorAnioLejano(){
-        return messageErrorCardHolder.getText();
+    public String errorDistantYear(){
+        if(messageErrorCardExpiration == null){
+            return "";
+        }
+        else {
+            return messageErrorCardExpiration.getText();}
     }
 
     public MessageAlertTrenes(WebDriver driver) {

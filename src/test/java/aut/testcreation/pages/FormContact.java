@@ -61,10 +61,14 @@ public class FormContact extends SeleniumWrapper {
     public void completeInputPrefijo(String value) {
         this.clickElementByJavaScript(this.btnShowPrefijo);
         this.sendKeysToElementVisible(this.inputInsertPrefijo, "+"+value);
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){}
         Assertions.assertTrue(this.optionsCountrys.size() == 1,
                 "Se esperaba que la lista de países tenga 1 elemento, pero tiene " + this.optionsCountrys.size() + " elementos.");
         WebElement element = this.optionsCountrys.get(0);
         String text = this.getTextByElement(element);
+
         boolean validate = text.toLowerCase().contains(value);
         Assertions.assertTrue(validate,
                 "El prefijo no coincide con el encontrado");

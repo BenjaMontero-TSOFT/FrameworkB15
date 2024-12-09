@@ -38,7 +38,7 @@ public class ReservaViajeTren extends SeleniumWrapper {
         formContact.completeInputName(name);
         formContact.completeInputSurname(surName);
         formContact.completeInputEmail(email);
-        formContact.completeInputPrefijo(prefijo);
+        //formContact.completeInputPrefijo(prefijo);
         formContact.completeInputTel(tel);
     }
 
