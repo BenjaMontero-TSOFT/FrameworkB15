@@ -42,7 +42,7 @@ public class ReserveFlightPage extends ReserveHotelPage {
         By byMonthBirth = By.xpath("//button[@data-testid='groups.1.travellers." + variable + ".dateOfBirth_month']");
         By byYearBirth = By.xpath("//div[@data-testid='groups.1.travellers." + variable + ".dateOfBirth_year']//input[@name='groups.1.travellers." + variable + ".dateOfBirth']");
         By byMaletaIda = By.xpath("//div[@data-testid='traveller-container-1-" + variable + "-1-ADT_1']//div[text()='Sin maleta facturada']");
-        By byMaletaVuelta = By.xpath("//div[@data-testid='traveller-container-1-" + variable +"-2-ADT_2']//div[text()='Sin maleta facturada']");
+        //By byMaletaVuelta = By.xpath("//div[@data-testid='traveller-container-1-" + variable +"-2-ADT_2']//div[text()='Sin maleta facturada']");
 
         WebElement nombre = findElement(byName);
         WebElement apellido = findElement(bySurName);
@@ -51,7 +51,7 @@ public class ReserveFlightPage extends ReserveHotelPage {
         WebElement mes = findElement(byMonthBirth);
         WebElement anio = findElement(byYearBirth);
         WebElement maletaIda = findElement(byMaletaIda);
-        WebElement maletaVuelta = findElement(byMaletaVuelta);
+        //WebElement maletaVuelta = findElement(byMaletaVuelta);
 
         sendKeysToElementVisible(nombre, nom_);
         sendKeysToElementVisible(apellido, ape_);
@@ -63,7 +63,7 @@ public class ReserveFlightPage extends ReserveHotelPage {
         sendKeysToElementVisible(anio, anio_);
         clickElementByJavaScript(BtnSeguro);
         clickElementByJavaScript(maletaIda);
-        clickElementByJavaScript(maletaVuelta);
+        //clickElementByJavaScript(maletaVuelta);
 
     }
 
@@ -76,6 +76,12 @@ public class ReserveFlightPage extends ReserveHotelPage {
 
     public void siguiente(){
         clickToElementClickable(BtnNext);
+    }
+
+    public String getNameError(){
+        By error = By.xpath("//span[text()='Introduce el nombre.']");
+        WebElement errorElement = findElement(error);
+        return getTextByElement(errorElement);
     }
 
 }

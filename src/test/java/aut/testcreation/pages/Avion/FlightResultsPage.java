@@ -1,12 +1,13 @@
 package aut.testcreation.pages.Avion;
 
 import aut.testcreation.pages.SearchNavigationHome;
+import framework.engine.selenium.SeleniumWrapper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class FlightResultsPage extends SearchNavigationHome {
+public class FlightResultsPage extends SeleniumWrapper {
     @FindBy (xpath = "//div[@class='trip-collection-view__trips-container-top']//button")
     private WebElement selectedFlightButton;
 

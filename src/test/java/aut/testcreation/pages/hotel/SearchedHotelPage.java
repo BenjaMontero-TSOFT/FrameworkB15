@@ -120,4 +120,8 @@ public class SearchedHotelPage extends SeleniumWrapper {
         return input.replaceAll("[^0-9-]", "");
     }
 
+    public Integer getResultSize(){
+        return this.resultsOfSearched.size();
+    }
+
 }

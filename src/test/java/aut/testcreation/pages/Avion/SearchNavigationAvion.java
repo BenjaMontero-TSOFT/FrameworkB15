@@ -37,6 +37,8 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     @FindBy (xpath = "//div[@aria-label='Vuelos']//button[@aria-label='¿Cuándo?']")
     private WebElement BtnFechaIda;
 
+    /*@FindBy (xpath = "//span[text()='El número de bebés (edad 0-1) no puede ser superior al de adultos.']")
+    private WebElement errorMsg;*/
 
     @FindBy (xpath = "//li[@role='option']")
     private List<WebElement> opciones;

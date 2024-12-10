@@ -21,8 +21,14 @@ public class HomePage extends SeleniumWrapper {
     }
 
     public void closeCookies(){
-        if(titleCookies.isDisplayed()){
-            this.clickToElementClickable(this.btnCookies);
+        try{
+            if(titleCookies.isEnabled()){
+                this.clickToElementClickable(this.btnCookies);
+            }else{
+
+            }
+        }catch(Exception e){
+            System.out.println("Error de cookies");
         }
     }
 }
