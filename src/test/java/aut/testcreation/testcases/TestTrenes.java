@@ -1,55 +1,116 @@
 package aut.testcreation.testcases;
 
 import aut.testcreation.pages.*;
-import aut.testcreation.pages.trenes.FiltersJourney;
-import aut.testcreation.pages.trenes.SearchNavigationTrenes;
+import aut.testcreation.pages.trenes.MessageAlertTrenes;
+import aut.testcreation.pages.trenes.ReservaViajeTren;
 import framework.engine.selenium.SeleniumTestBase;
-import framework.engine.selenium.SeleniumWrapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
+
 
 public class TestTrenes extends SeleniumTestBase {
 
-    private HomePage homePage;
-    private NavBarHomePage navBarHomePage;
-    private SearchNavigationTrenes searchNavigationTrenes;
-    private FiltersJourney filtersJourney;
-    private FormContact formContact;
-    private FormPassengerData formPassengerData;
-    private FormPaymentData formPaymentData;
 
     @Test
     @DisplayName("TC-T01")
     public void reservaTrenPagoViajeTitularInvalido() throws InterruptedException{
-        this.driver.get("https://www.rumbo.es/");
-        this.homePage = new HomePage(driver);
-        Thread.sleep(1000);
-        this.homePage.closeCookies();
-        this.navBarHomePage = new NavBarHomePage(driver);
-        this.searchNavigationTrenes = new SearchNavigationTrenes(driver);
-        this.filtersJourney = new FiltersJourney(driver);
-        this.formContact = new FormContact(driver);
-        this.formPassengerData = new FormPassengerData(driver);
-        this.formPaymentData = new FormPaymentData(driver);
+        ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
+        reservaViajeTren.selectSectionTrenes();
+        reservaViajeTren.completeSearchJourney(dataSet.get(1),dataSet.get(2),dataSet.get(3),dataSet.get(4));
+        reservaViajeTren.completeSelectJourney();
+        reservaViajeTren.completeFormContact(dataSet.get(5),dataSet.get(6),dataSet.get(7),dataSet.get(8),dataSet.get(9));
+        reservaViajeTren.completeFormPassenger("1",dataSet.get(11),dataSet.get(12),dataSet.get(13),dataSet.get(14),dataSet.get(15),dataSet.get(16),dataSet.get(17));
+        reservaViajeTren.completeFormPassenger("2",dataSet.get(11),dataSet.get(12),dataSet.get(13),dataSet.get(14),dataSet.get(15),dataSet.get(16),dataSet.get(17));
+        reservaViajeTren.secureNoThanks();
+        reservaViajeTren.clickBtnSiguiente();
+        reservaViajeTren.completeFormPaymentData("4517629108566275","02","30","345","+");
 
-        navBarHomePage.selectSectionTrenes();
-        searchNavigationTrenes.completeSearchJourney("Madrid","Bilbao","25","5");
-        filtersJourney.completeSelectJourney();
-        formContact.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","+54","4567879091");
-        formPassengerData.completeFormPassenger("Sr","UserName","SurNameUser","10","Marzo","2000","39090453");
-        formPassengerData.completeFormPassenger2("Sra","userTwo","suNameUserTwo","15","enero","1995","29087976");
-        formPassengerData.secureNoThanks();
-        formPassengerData.clickBtnSiguiente();
+        MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
+        messageAlertTrenes.errorCardHolder();
+
+    }
+    @Test
+    @DisplayName("TC-T02")
+    public void ReservaTrenPagoViajeTarjetaAAlejanoinvalido() throws InterruptedException {
+        ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
+        MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
+        reservaViajeTren.selectSectionTrenes();
+        reservaViajeTren.completeSearchJourney(dataSet.get(1),dataSet.get(2),dataSet.get(3),dataSet.get(4));
+        reservaViajeTren.completeSelectJourney();
+        reservaViajeTren.completeFormContact(dataSet.get(5),dataSet.get(6),dataSet.get(7),dataSet.get(8),dataSet.get(9));
+        reservaViajeTren.completeFormPassenger(dataSet.get(10),dataSet.get(11),dataSet.get(12),dataSet.get(13),dataSet.get(14),dataSet.get(15),dataSet.get(16),dataSet.get(17));
+        reservaViajeTren.completeFormPassenger("2","Sra","userTwo","suNameUserTwo","15","enero","1999","29087976");
+        reservaViajeTren.secureNoThanks();
+        reservaViajeTren.clickBtnSiguiente();
+        reservaViajeTren.completeFormPaymentData("4517629108566275","02","43","345","NameHolderCard");
+        messageAlertTrenes.errorDistantYear();
+
+    }
+
+    @Test
+    @DisplayName("TC-T03")
+    public void ReservaTrenTituloPageTren () throws InterruptedException {
+        ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
+        reservaViajeTren.selectSectionTrenes();
+        reservaViajeTren.completeSearchJourney(dataSet.get(1),dataSet.get(2),dataSet.get(3),dataSet.get(4));
+        MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
+        messageAlertTrenes.errorTitle();
+    }
+
+    @Test
+    @DisplayName("TC-T04")
+    public void ReservaTrenDatosPagoCuponDescuentoInvalido () throws InterruptedException {
+        MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
+        ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
+        reservaViajeTren.selectSectionTrenes();
+        reservaViajeTren.completeSearchJourney(dataSet.get(1),dataSet.get(2),dataSet.get(3),dataSet.get(4));
+        reservaViajeTren.completeSelectJourney();
+        reservaViajeTren.completeFormContact(dataSet.get(5),dataSet.get(6),dataSet.get(7),dataSet.get(8),dataSet.get(9));
+        reservaViajeTren.completeFormPassenger(dataSet.get(10),dataSet.get(11),dataSet.get(12),dataSet.get(13),dataSet.get(14),dataSet.get(15),dataSet.get(16),dataSet.get(17));
+        reservaViajeTren.completeFormPassenger("2","Sra","userTwo","suNameUserTwo","15","enero","1999","29087976");
+        reservaViajeTren.secureNoThanks();
+        reservaViajeTren.clickBtnSiguiente();
         Thread.sleep(3000);
-        formPaymentData.insertNumberOfCreditCard("4517629108566275");
-        formPaymentData.insertMonth("02");
-        formPaymentData.insertYear("30");
-        formPaymentData.insertCvv("345");
-        formPaymentData.insertCardHolder("+");
-        if(formPaymentData.messageInvalidCardHolderError()){
-            System.out.println("Test aprobado");
-        }
-        else System.out.println("Test NO aprobado");
+        reservaViajeTren.completeFormPaymentData("4517629108566275","02","30","345","User Name Card");
+        reservaViajeTren.setCuponDescuento("HOLIDAY100");
+        messageAlertTrenes.errorCuponDescuento();
+    }
+
+    @Test
+    @DisplayName("TC-T05")
+    public void ReservaTrenCargaDatosIngresoEdadNinioInvalido () throws InterruptedException {
+        ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
+        MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
+        reservaViajeTren.selectSectionTrenes();
+        reservaViajeTren.completeSearchJourney(dataSet.get(1),dataSet.get(2),dataSet.get(3),dataSet.get(4));
+        reservaViajeTren.completeSelectJourney();
+        reservaViajeTren.completeFormContact(dataSet.get(5),dataSet.get(6),dataSet.get(7),dataSet.get(8),dataSet.get(9));
+        reservaViajeTren.completeFormPassenger(dataSet.get(10),dataSet.get(11),dataSet.get(12),dataSet.get(13),dataSet.get(14),dataSet.get(15),dataSet.get(16),dataSet.get(17));
+        reservaViajeTren.completeFormPassenger("2","Sra","userTwo","suNameUserTwo","15","enero","2014","29087976");
+        messageAlertTrenes.errorPassengerEdad();
+
+    }
+
+    @Test
+    @DisplayName("TC-T06")
+    public void ReservaTrenCargaDatosIngresoEdadBebeInvalido () throws InterruptedException {
+        ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
+        MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
+        reservaViajeTren.selectSectionTrenes();
+        reservaViajeTren.completeSearchJourney(dataSet.get(1),dataSet.get(2),dataSet.get(3),dataSet.get(4));
+        reservaViajeTren.completeSelectJourney();
+        reservaViajeTren.completeFormContact(dataSet.get(5),dataSet.get(6),dataSet.get(7),dataSet.get(8),dataSet.get(9));
+        reservaViajeTren.completeFormPassenger(dataSet.get(10),dataSet.get(11),dataSet.get(12),dataSet.get(13),dataSet.get(14),dataSet.get(15),dataSet.get(16),dataSet.get(17));
+        reservaViajeTren.completeFormPassenger("2","Sra","userTwo","suNameUserTwo","15","enero","2023","29087976");
+        messageAlertTrenes.errorPassengerEdad();
+    }
+
+    @BeforeEach
+    public void preCondiciones() throws InterruptedException {
+        HomePage homePage = new HomePage(driver);
+        this.driver.get("https://www.rumbo.es/");
+        Thread.sleep(1000);
+        homePage.closeCookies();
     }
 }

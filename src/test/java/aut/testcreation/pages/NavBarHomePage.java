@@ -54,7 +54,6 @@ public class NavBarHomePage extends SeleniumWrapper {
 
         clickToElementClickable(granCanaria);
     }
-
     public NavBarHomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);

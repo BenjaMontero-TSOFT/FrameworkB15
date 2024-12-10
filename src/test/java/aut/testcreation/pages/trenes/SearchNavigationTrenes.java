@@ -70,15 +70,6 @@ public class SearchNavigationTrenes extends SearchNavigationHome {
         this.clickElementByJavaScript(this.people);
     }
 
-    public void completeSearchJourney(String origin, String destination,String dateIda, String dateVuelta){
-        journeyOriginOption(origin);
-        journeyDestinationOption(destination);
-        selectDates(dateIda,dateVuelta);
-        clickPersonsOptions();
-        selectPeople(2);
-        clickSearch();
-    }
-
     public void clickSearch(){
         this.clickToElementClickable(btnSearch);
     }
