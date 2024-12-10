@@ -11,9 +11,8 @@ public class MessageAlertTrenes extends SeleniumWrapper {
 
     public void errorCardHolder() {
         By byMessageErrorCardHolder = By.xpath("//div[@data-testid='creditCard.cardHolder']//span[@data-testid='input-helper-text']");
-        WebElement messageErrorCardHolder;
         try {
-            messageErrorCardHolder = driver.findElement(byMessageErrorCardHolder);
+            WebElement messageErrorCardHolder = driver.findElement(byMessageErrorCardHolder);
             if (messageErrorCardHolder.getText().equalsIgnoreCase("Titular ingresado invalido")) {
                 System.out.println("Test aprobado");
             } else {
