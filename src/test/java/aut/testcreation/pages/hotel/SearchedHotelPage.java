@@ -89,8 +89,9 @@ public class SearchedHotelPage extends SeleniumWrapper {
                 By byIda = By.xpath("//div[@data-date='2024-12-" + fechaIda + "']");
                 Thread.sleep(1000);
                 By byVuelta = By.xpath("//div[@data-date='2024-12-" + fechaVuelta + "']");
-                click(byIda);
-                click(byVuelta);
+                clickToElementClickable(findElement(byIda));
+                clickToElementClickable(findElement(byVuelta));
+                Thread.sleep(500);
                 clickElementByJavaScript(research);
                 break;
             }

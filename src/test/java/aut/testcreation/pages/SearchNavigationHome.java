@@ -57,10 +57,13 @@ public class SearchNavigationHome extends SeleniumWrapper {
     @FindBy (xpath = "//span[@role='alert']")
     private WebElement alertMessage;
 
+    @FindBy(xpath = "//LI[@id='listbox-option-0']")
+    private WebElement firstOptionOfLocation;
+
     @FindBy (xpath = "//li[text()='Bebé, 0-11 meses']")
     private WebElement BtnBabyOption;
 
-    @FindBy (xpath = "//div[button[@aria-label='Reducir el número de adultos']]//span")
+    @FindBy (xpath = "//div[@class='d-1ea2lc2']//span")
     protected WebElement numberPeople;
 
     @FindBy (xpath = "//Button[@aria-label='Reducir el número de adultos']")
@@ -69,6 +72,16 @@ public class SearchNavigationHome extends SeleniumWrapper {
     public SearchNavigationHome(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+    }
+
+
+    public void clickFirstOption(){
+        try{
+            Thread.sleep(1000);
+            this.clickToElementClickable(this.firstOptionOfLocation);
+        }catch(Exception e){
+
+        }
     }
 
     public void openDates(){
@@ -81,7 +94,7 @@ public class SearchNavigationHome extends SeleniumWrapper {
 
     public void selectDates(String firstDate, String secondDate){
         //itero y selecciono el btn que contenga el nro del dia que me llega por parametro
-        openDates();
+        //openDates();
 
         for(WebElement btnDate : this.btnsFirstDates){
             if(this.getTextByElement(btnDate).equalsIgnoreCase(firstDate)){

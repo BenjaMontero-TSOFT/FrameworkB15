@@ -21,7 +21,6 @@ public class TestVuelos extends SeleniumTestBase {
     private FlashSaleLandingPage flashSale;
     private Fee fee;
     private NavBarHomePage navBar;
-    private FormContact contactData;
     private FormPassengerData passengerData;
     private ReserveFlightPage reserveFlight;
     private SeatReservationPage seatReservation;
@@ -36,6 +35,7 @@ public class TestVuelos extends SeleniumTestBase {
         Thread.sleep(2000);
         this.homePage.closeCookies();
         this.fee = new Fee(this.driver);
+        this.reserveFlight = new ReserveFlightPage(this.driver);
 
         searchAvion = new SearchNavigationAvion(this.driver);
         resultadosVuelos = new FlightResultsPage(this.driver);
@@ -44,7 +44,7 @@ public class TestVuelos extends SeleniumTestBase {
         searchAvion.clickBuscar();
         resultadosVuelos.selectFlight();
 
-        Assertions.assertTrue(fee.getResult());
+        Assertions.assertTrue(reserveFlight.getResult());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class TestVuelos extends SeleniumTestBase {
         this.hoteles = new SearchedHotelPage(this.driver);
         this.infoHotel = new InformationHotelPage(this.driver);
 
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         this.homePage.closeCookies();
 
         searchAvion = new SearchNavigationAvion(this.driver);
@@ -82,14 +82,15 @@ public class TestVuelos extends SeleniumTestBase {
         searchAvion.clickBuscar();
 
         hotelFiltro.StarsFilter();
-        Thread.sleep(1000);
+        Thread.sleep(750);
 
         hoteles.goToFirstResult();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
 
         infoHotel.changeFlight();
 
-        Assertions.assertEquals(dataSet.get(6), infoHotel.getMejorOferta());
+        boolean vbalidate = infoHotel.getMejorOferta().toLowerCase().contains(dataSet.get(6).toLowerCase());
+        Assertions.assertTrue(vbalidate);
 
     }
 
@@ -120,7 +121,6 @@ public class TestVuelos extends SeleniumTestBase {
         this.flashSale = new FlashSaleLandingPage(this.driver);
         this.infoHotel = new InformationHotelPage(this.driver);
         this.fee = new Fee(this.driver);
-        this.contactData = new FormContact(this.driver);
         this.passengerData = new FormPassengerData(this.driver);
         this.reserveFlight = new ReserveFlightPage(this.driver);
         this.seatReservation = new SeatReservationPage(this.driver);

@@ -13,8 +13,7 @@ public class SearchNavigationHotel extends SearchNavigationHome {
     private WebElement inputSearchMean;
     @FindBy(xpath = "//Button[@aria-label='Hoteles']")
     private WebElement btnHotel;
-    @FindBy(xpath = "//LI[@id='listbox-option-0']")
-    private WebElement firstOptionOfLocation;
+
 
     public SearchNavigationHotel(WebDriver driver) {
         super(driver);
@@ -26,9 +25,6 @@ public class SearchNavigationHotel extends SearchNavigationHome {
         //this.sendKeysToElementVisible(this.inputSearchMean, Keys.ENTER);
     }
 
-    public void clickFirstOption(){
-        this.clickToElementClickable(this.firstOptionOfLocation);
-    }
 
     public void moveSearchNavigationToHotel(){
         this.clickToElementClickable(this.btnHotel);

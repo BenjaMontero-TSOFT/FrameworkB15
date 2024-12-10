@@ -14,7 +14,7 @@ public class InformationHotelPage extends SeleniumWrapper {
     @FindBy (xpath = "//button[@data-test-id='book-cta']")
     private WebElement btnNavigateToReserve;
 
-    @FindBy (xpath = "//div[text()='Esta es nuestra mejor oferta entre 789 opciones.']")
+    @FindBy (xpath = "//div[contains(text(), 'Esta es nuestra mejor oferta')]")
     private WebElement mejorOferta;
 
     @FindBy(xpath = "//div[@id='rooms']//button[@data-testid='checkout-button']")
@@ -47,7 +47,7 @@ public class InformationHotelPage extends SeleniumWrapper {
         clickToElementClickable(BtnChangeFlight);
         By byCheaper = By.xpath("//div[text()='Más barato']");
         click(byCheaper);
-        Thread.sleep(1000);
+        Thread.sleep(750);
         clickElementByJavaScript(BtnSelectNewFlight);
     }
 

@@ -29,7 +29,7 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     private WebElement MetodoDePago;
 
     @FindBy (xpath = "//input[@aria-label='Origen']")
-    private WebElement origen;
+    private WebElement btnOrigen;
 
     @FindBy (xpath = "//input[@aria-label='Destino']")
     private WebElement destino;
@@ -68,8 +68,10 @@ public class SearchNavigationAvion extends SearchNavigationHome {
     public void fillFlightSearch_IdaVuelta_Hotel(String origenValue, String destinoValue, String metodo, String fehcaIda, String fechaVuelta) throws InterruptedException {
 
         selectedOptionPaymentMethod(metodo);
-        sendKeysToElementVisible(origen, origenValue);
+        sendKeysToElementVisible(btnOrigen, origenValue);
+        clickFirstOption();
         sendKeysToElementVisible(destino, destinoValue);
+        clickFirstOption();
         selectDates(fehcaIda, fechaVuelta);
         Thread.sleep(1000);
 
@@ -93,15 +95,17 @@ public class SearchNavigationAvion extends SearchNavigationHome {
         clickToElementClickable(SoloIda);
         Thread.sleep(1000);
         selectedOptionPaymentMethod(metodo);
-        sendKeysToElementVisible(origen, origenValue);
+        sendKeysToElementVisible(btnOrigen, origenValue);
+        clickFirstOption();
         sendKeysToElementVisible(destino, destinoValue);
+        clickFirstOption();
         selectDate(fehcaIda);
         //clickPersonsOptions();
         selectPeople(people);
     }
 
     public void AmountOfBabysWrong(String babyAge){
-        clickPersonsOptions();
+        //clickPersonsOptions();
         addBaby(babyAge);
         addBaby(babyAge);
     }

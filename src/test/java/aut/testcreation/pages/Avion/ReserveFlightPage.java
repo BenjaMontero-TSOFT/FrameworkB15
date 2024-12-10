@@ -1,5 +1,6 @@
 package aut.testcreation.pages.Avion;
 
+import aut.testcreation.pages.FormContact;
 import aut.testcreation.pages.hotel.ReserveHotelPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -27,6 +28,9 @@ public class ReserveFlightPage extends ReserveHotelPage {
 
     @FindBy (xpath = "//input[@name='city']")
     private WebElement inptCity;
+
+    @FindBy(xpath = "//h3[@data-testid='contact-form-title']")
+    private WebElement formContactResult;
 
 
     public ReserveFlightPage(WebDriver driver) {
@@ -82,6 +86,10 @@ public class ReserveFlightPage extends ReserveHotelPage {
         By error = By.xpath("//span[text()='Introduce el nombre.']");
         WebElement errorElement = findElement(error);
         return getTextByElement(errorElement);
+    }
+
+    public boolean getResult(){
+        return this.formContactResult.isDisplayed();
     }
 
 }
