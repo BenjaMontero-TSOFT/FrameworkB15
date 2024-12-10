@@ -1,56 +1,59 @@
 package aut.testcreation.pages.trenes;
 
 import framework.engine.selenium.SeleniumWrapper;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class MessageAlertTrenes extends SeleniumWrapper {
 
-    @FindBy(xpath = "title")
-    private WebElement titlePageFilterJourney;
-
-    @FindBy(xpath = "//label[@for='voucher' and text()='El bono ha caducado.']")
-    private WebElement messageCuponResult;
-
-    @FindBy(xpath = "//span[@data-testid='groups.1.travellers.2.dateOfBirth_error']")
-    private WebElement messageAdultoIncorrecto;
-
-    @FindBy(xpath = "//span[@data-testid='creditCard.expirationDate_error']")
-    private WebElement messageErrorCardExpiration;
-
-    @FindBy(xpath = "//div[@data-testid='creditCard.cardHolder']//span[@data-testid='input-helper-text']")
-    private WebElement messageErrorCardHolder;
-
-    public String errorCardHolder(){
-        if(messageErrorCardHolder == null){
-            return "";
+    public void errorCardHolder() {
+        By byMessageErrorCardHolder = By.xpath("//div[@data-testid='creditCard.cardHolder']//span[@data-testid='input-helper-text']");
+        WebElement messageErrorCardHolder;
+        try {
+            messageErrorCardHolder = driver.findElement(byMessageErrorCardHolder);
+            if (messageErrorCardHolder.getText().equalsIgnoreCase("Titular ingresado invalido")) {
+                System.out.println("Test aprobado");
+            } else {
+                System.out.println("Test NO aprobado: Unexpected error message");
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Test No aprobado: Element not found");
         }
-        else return messageErrorCardHolder.getText();
     }
 
-    public String errorCuponDescuento(){
-        if(messageCuponResult == null){
-            return "";
-        }
+    public void errorCuponDescuento() {
+        By byMessageCuponResult = By.xpath("//label[@for='voucher' and text()='El bono ha caducado.']");
+        WebElement messageCuponResult = driver.findElement(byMessageCuponResult);
+
+        if (messageCuponResult.getText().equalsIgnoreCase("El bono ha caducado.")) System.out.println("Test aprobado");
         else {
-            return messageCuponResult.getText();}
+            System.out.println("Test NO aprobado");
+        }
     }
 
-    public String errorPassengerEdad(){
-        if(messageAdultoIncorrecto == null){
-            return "";
-        }
-        else {
-            return messageAdultoIncorrecto.getText();}
+    public void errorPassengerEdad(){
+        By byMessageAdultoIncorrecto = By.xpath("//span[@data-testid='groups.1.travellers.2.dateOfBirth_error']");
+        WebElement messageAdultoIncorrecto = driver.findElement(byMessageAdultoIncorrecto);
+
+        if(messageAdultoIncorrecto.getText().equalsIgnoreCase("El adulto debe tener más de 12 años"))System.out.println("Test aprobado");
+        else System.out.println("Test NO aprobado");
     }
 
-    public String errorDistantYear(){
-        if(messageErrorCardExpiration == null){
-            return "";
-        }
-        else {
-            return messageErrorCardExpiration.getText();}
+    public void errorDistantYear(){
+        By byMessageErrorCardExpiration = By.xpath("//span[@data-testid='creditCard.expirationDate_error']");
+        WebElement messageErrorCardExpiration = driver.findElement(byMessageErrorCardExpiration);
+
+        if(messageErrorCardExpiration.getText().equalsIgnoreCase("Año demasiado lejano en el tiempo"))System.out.println("Test aprobado");
+        else System.out.println("Test NO aprobado");
+    }
+
+    public void errorTitle(){
+        String titlePage = driver.getTitle();
+        if(titlePage.equalsIgnoreCase("Rumbo trenes baratos Madrid - Bilbao"))System.out.println("Test aprobado");
+        else System.out.println("Test NO aprobado");
     }
 
     public MessageAlertTrenes(WebDriver driver) {

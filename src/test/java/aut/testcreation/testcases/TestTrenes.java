@@ -4,13 +4,10 @@ import aut.testcreation.pages.*;
 import aut.testcreation.pages.trenes.MessageAlertTrenes;
 import aut.testcreation.pages.trenes.ReservaViajeTren;
 import framework.engine.selenium.SeleniumTestBase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+
 
 public class TestTrenes extends SeleniumTestBase {
 
@@ -20,22 +17,18 @@ public class TestTrenes extends SeleniumTestBase {
     public void reservaTrenPagoViajeTitularInvalido() throws InterruptedException{
         ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
         reservaViajeTren.selectSectionTrenes();
-        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","25","5");
+        reservaViajeTren.completeSearchJourney(dataSet.get(1),dataSet.get(2),dataSet.get(3),dataSet.get(4));
         reservaViajeTren.completeSelectJourney();
-        reservaViajeTren.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","54","4567879091");
-        reservaViajeTren.completeFormPassenger("Sr","UserName","SurNameUser","10","Marzo","2000","39090453");
-        reservaViajeTren.completeFormPassenger2("Sra","userTwo","suNameUserTwo","15","enero","1995","29087976");
+        reservaViajeTren.completeFormContact(dataSet.get(5),dataSet.get(6),dataSet.get(7),dataSet.get(8),dataSet.get(9));
+        reservaViajeTren.completeFormPassenger("1",dataSet.get(11),dataSet.get(12),dataSet.get(13),dataSet.get(14),dataSet.get(15),dataSet.get(16),dataSet.get(17));
+        reservaViajeTren.completeFormPassenger("2",dataSet.get(11),dataSet.get(12),dataSet.get(13),dataSet.get(14),dataSet.get(15),dataSet.get(16),dataSet.get(17));
         reservaViajeTren.secureNoThanks();
         reservaViajeTren.clickBtnSiguiente();
-        Thread.sleep(3000);
         reservaViajeTren.completeFormPaymentData("4517629108566275","02","30","345","+");
 
         MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
-        String messageTest = messageAlertTrenes.errorCardHolder();
-        if(messageTest.equalsIgnoreCase("Titular ingresado invalido")){
-            System.out.println("Test aprobado");
-        }
-        else System.out.println("Test NO aprobado");
+        messageAlertTrenes.errorCardHolder();
+
     }
     @Test
     @DisplayName("TC-T02")
@@ -43,19 +36,16 @@ public class TestTrenes extends SeleniumTestBase {
         ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
         MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
         reservaViajeTren.selectSectionTrenes();
-        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","27","8");        reservaViajeTren.completeSelectJourney();
-        reservaViajeTren.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","+54","4567879091");
-        reservaViajeTren.completeFormPassenger("Sr","UserName","SurNameUser","10","Marzo","2000","39090453");
-        reservaViajeTren.completeFormPassenger2("Sra","userTwo","suNameUserTwo","15","enero","1995","29087976");
+        reservaViajeTren.completeSearchJourney(dataSet.get(1),dataSet.get(2),dataSet.get(3),dataSet.get(4));
+        reservaViajeTren.completeSelectJourney();
+        reservaViajeTren.completeFormContact(dataSet.get(5),dataSet.get(6),dataSet.get(7),dataSet.get(8),dataSet.get(9));
+        reservaViajeTren.completeFormPassenger(dataSet.get(10),dataSet.get(11),dataSet.get(12),dataSet.get(13),dataSet.get(14),dataSet.get(15),dataSet.get(16),dataSet.get(17));
+        reservaViajeTren.completeFormPassenger("2","Sra","userTwo","suNameUserTwo","15","enero","1999","29087976");
         reservaViajeTren.secureNoThanks();
         reservaViajeTren.clickBtnSiguiente();
         reservaViajeTren.completeFormPaymentData("4517629108566275","02","43","345","NameHolderCard");
-        String messageTest = messageAlertTrenes.errorDistantYear();
-        if(messageTest.equalsIgnoreCase("Año demasiado lejano en el tiempo")){
-            System.out.println("Test aprobado");
-        }
-        else System.out.println("Test NO aprobado");
-        System.out.println("El mensaje es: "+ messageTest);
+        messageAlertTrenes.errorDistantYear();
+
     }
 
     @Test
@@ -63,12 +53,9 @@ public class TestTrenes extends SeleniumTestBase {
     public void ReservaTrenTituloPageTren () throws InterruptedException {
         ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
         reservaViajeTren.selectSectionTrenes();
-        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","27","8");
-        String titlePage = driver.getTitle();
-        if(titlePage.equalsIgnoreCase("Rumbo vuelos baratos Madrid - Bilbao")){
-            System.out.println("Test aprobado");
-        }
-        else System.out.println("Test NO aprobado");
+        reservaViajeTren.completeSearchJourney(dataSet.get(1),dataSet.get(2),dataSet.get(3),dataSet.get(4));
+        MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
+        messageAlertTrenes.errorTitle();
     }
 
     @Test
@@ -77,21 +64,17 @@ public class TestTrenes extends SeleniumTestBase {
         MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
         ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
         reservaViajeTren.selectSectionTrenes();
-        reservaViajeTren.completeSearchJourney("Madrid","Barcelona","30","8");
+        reservaViajeTren.completeSearchJourney(dataSet.get(1),dataSet.get(2),dataSet.get(3),dataSet.get(4));
         reservaViajeTren.completeSelectJourney();
-        reservaViajeTren.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","+54","4567879091");
-        reservaViajeTren.completeFormPassenger("Sr","UserName","SurNameUser","10","Marzo","2000","39090453");
-        reservaViajeTren.completeFormPassenger2("Sra","userTwo","suNameUserTwo","15","enero","1995","29087976");
+        reservaViajeTren.completeFormContact(dataSet.get(5),dataSet.get(6),dataSet.get(7),dataSet.get(8),dataSet.get(9));
+        reservaViajeTren.completeFormPassenger(dataSet.get(10),dataSet.get(11),dataSet.get(12),dataSet.get(13),dataSet.get(14),dataSet.get(15),dataSet.get(16),dataSet.get(17));
+        reservaViajeTren.completeFormPassenger("2","Sra","userTwo","suNameUserTwo","15","enero","1999","29087976");
         reservaViajeTren.secureNoThanks();
         reservaViajeTren.clickBtnSiguiente();
         Thread.sleep(3000);
         reservaViajeTren.completeFormPaymentData("4517629108566275","02","30","345","User Name Card");
         reservaViajeTren.setCuponDescuento("HOLIDAY100");
-        String message = messageAlertTrenes.errorCuponDescuento();
-        if(message.equalsIgnoreCase("El bono ha caducado.")){
-            System.out.println("Test aprobado");
-        }
-        else System.out.println("Test NO aprobado");
+        messageAlertTrenes.errorCuponDescuento();
     }
 
     @Test
@@ -100,16 +83,13 @@ public class TestTrenes extends SeleniumTestBase {
         ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
         MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
         reservaViajeTren.selectSectionTrenes();
-        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","27","8");
+        reservaViajeTren.completeSearchJourney(dataSet.get(1),dataSet.get(2),dataSet.get(3),dataSet.get(4));
         reservaViajeTren.completeSelectJourney();
-        reservaViajeTren.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","+54","4567879091");
-        reservaViajeTren.completeFormPassenger("Sr","UserName","SurNameUser","10","Marzo","2000","39090453");
-        reservaViajeTren.completeFormPassenger2("Sra","userTwo","suNameUserTwo","15","enero","2014","29087976");
-        String message = messageAlertTrenes.errorPassengerEdad();
-        if(message.equalsIgnoreCase("El adulto debe tener más de 12 años")){
-            System.out.println("Test aprobado");
-        }
-        else System.out.println("Test NO aprobado");
+        reservaViajeTren.completeFormContact(dataSet.get(5),dataSet.get(6),dataSet.get(7),dataSet.get(8),dataSet.get(9));
+        reservaViajeTren.completeFormPassenger(dataSet.get(10),dataSet.get(11),dataSet.get(12),dataSet.get(13),dataSet.get(14),dataSet.get(15),dataSet.get(16),dataSet.get(17));
+        reservaViajeTren.completeFormPassenger("2","Sra","userTwo","suNameUserTwo","15","enero","2014","29087976");
+        messageAlertTrenes.errorPassengerEdad();
+
     }
 
     @Test
@@ -118,16 +98,12 @@ public class TestTrenes extends SeleniumTestBase {
         ReservaViajeTren reservaViajeTren = new ReservaViajeTren(driver);
         MessageAlertTrenes messageAlertTrenes = new MessageAlertTrenes(driver);
         reservaViajeTren.selectSectionTrenes();
-        reservaViajeTren.completeSearchJourney("Madrid","Bilbao","27","8");
+        reservaViajeTren.completeSearchJourney(dataSet.get(1),dataSet.get(2),dataSet.get(3),dataSet.get(4));
         reservaViajeTren.completeSelectJourney();
-        reservaViajeTren.completeFormContact("Gonzalo","Acevedo","useruser1515@gmail.com","+54","4567879091");
-        reservaViajeTren.completeFormPassenger("Sr","UserName","SurNameUser","10","Marzo","2000","39090453");
-        reservaViajeTren.completeFormPassenger2("Sra","userTwo","suNameUserTwo","15","enero","2023","29087976");
-        String message = messageAlertTrenes.errorPassengerEdad();
-        if(message.equalsIgnoreCase("El adulto debe tener más de 12 años")){
-            System.out.println("Test aprobado");
-        }
-        else System.out.println("Test NO aprobado");
+        reservaViajeTren.completeFormContact(dataSet.get(5),dataSet.get(6),dataSet.get(7),dataSet.get(8),dataSet.get(9));
+        reservaViajeTren.completeFormPassenger(dataSet.get(10),dataSet.get(11),dataSet.get(12),dataSet.get(13),dataSet.get(14),dataSet.get(15),dataSet.get(16),dataSet.get(17));
+        reservaViajeTren.completeFormPassenger("2","Sra","userTwo","suNameUserTwo","15","enero","2023","29087976");
+        messageAlertTrenes.errorPassengerEdad();
     }
 
     @BeforeEach

@@ -2,21 +2,23 @@ package aut.testcreation.pages.trenes;
 
 import aut.testcreation.pages.*;
 import framework.engine.selenium.SeleniumWrapper;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 
 public class ReservaViajeTren extends SeleniumWrapper {
 
-    private NavBarHomePage navBarHomePage = new NavBarHomePage(driver);
-    private SearchNavigationTrenes searchNavigationTrenes = new SearchNavigationTrenes(driver);
-    private FiltersJourney filtersJourney = new FiltersJourney(driver);
-    private FormContact formContact = new FormContact(driver);
-    private FormPassengerData formPassengerData = new FormPassengerData(driver);
-    private FormPaymentData formPaymentData = new FormPaymentData(driver);
+    protected NavBarHomePage navBarHomePage = new NavBarHomePage(driver);
+    protected SearchNavigationTrenes searchNavigationTrenes = new SearchNavigationTrenes(driver);
+    protected FiltersJourney filtersJourney = new FiltersJourney(driver);
+    protected FormContact formContact = new FormContact(driver);
+    protected FormPaymentData formPaymentData = new FormPaymentData(driver);
 
 
     @FindBy(xpath = "//label[@class='insurance__noThanks-radio-label']//input")
@@ -56,25 +58,58 @@ public class ReservaViajeTren extends SeleniumWrapper {
         navBarHomePage.selectTrenesSection();
     }
 
-    public void completeFormPassenger(String gender,String name, String surName, String day, String month, String years, String documentType) throws InterruptedException {
-        formPassengerData.completeInputGenderPassenger(gender);
-        formPassengerData.completeInputNamePassenger(name);
-        formPassengerData.completeInputSurNamePassenger(surName);
-        formPassengerData.completeInputDayPassenger(day);
-        formPassengerData.completeInputMonthPassenger(month);
-        formPassengerData.completeInputYearsPassenger(years);
-        formPassengerData.completeInputDocumentType(documentType);
+    public void completeFormPassenger(String numberPassengerString, String gender,String name, String surName, String day, String month, String years, String documentType) throws InterruptedException {
+
+        int numberPassenger = Integer.parseInt(numberPassengerString);
+        //Locators
+        By byGenderList = By.xpath("//input[@name='groups.1.travellers."+numberPassenger+".title']");
+        By byNamePassenger = By.xpath("//input[@name='groups.1.travellers."+numberPassenger+".name']");
+        By bySurNamePassenger = By.xpath("//input[@name='groups.1.travellers."+numberPassenger+".surname']");
+        By byDateOfBirth = By.xpath("//input[@name='groups.1.travellers."+numberPassenger+".dateOfBirth']");
+        By byBtnMonthText = By.xpath("//button[@data-testid='groups.1.travellers."+numberPassenger+".dateOfBirth_month']");
+        By byYearsPassengerList = By.xpath("//span[text()='Año']");//AQUI
+        By byBtnTypeDocumentPassenger = By.xpath("//button[@data-testid='groups.1.travellers."+numberPassenger+".documentType']");
+        By byInputTypeDocumentPassenger = By.xpath("//input[@name='groups.1.travellers."+numberPassenger+".documentNumber']");
+
+        //Elements web
+        List<WebElement> genderList = driver.findElements(byGenderList);
+        WebElement namePassenger = driver.findElement(byNamePassenger);
+        WebElement surNamePassenger = driver.findElement(bySurNamePassenger);
+        List<WebElement> dateOfBirth = driver.findElements(byDateOfBirth);
+        WebElement btnMonth = driver.findElement(byBtnMonthText);
+        List<WebElement> yearsPassengerList = driver.findElements(byYearsPassengerList);
+        WebElement btnTypeDocumentPassenger = driver.findElement(byBtnTypeDocumentPassenger);
+        WebElement inputTypeDocumentPassenger = driver.findElement(byInputTypeDocumentPassenger);
+
+        //Gender
+        if(gender.equalsIgnoreCase("Sr"))clickElementByJavaScript(genderList.get(0));
+        else clickElementByJavaScript(genderList.get(1));
+
+        //Name user
+        sendKeysToElementVisible(namePassenger, name);
+        //Surname user
+        sendKeysToElementVisible(surNamePassenger, surName);
+        //Day DateofBirth
+        clickElementByJavaScript(dateOfBirth.get(0));
+        sendKeysToElementVisible(dateOfBirth.get(0),day);
+        sendKeysToElementVisible(dateOfBirth.get(0) , Keys.ENTER);
+        //Month
+        clickElementByJavaScript(btnMonth);
+        WebElement monthInput = driver.findElement(By.xpath("//input[@aria-label='search-input']"));
+        sendKeysToElementVisible(monthInput,month);
+        sendKeysToElementVisible(monthInput,Keys.ENTER);
+        //Years
+        clickElementByJavaScript(yearsPassengerList.get(0));
+        sendKeysToElementVisible(dateOfBirth.get(1), years);
+        sendKeysToElementVisible(dateOfBirth.get(1) , Keys.ENTER);
+        //Document passenger
+        clickElementByJavaScript(btnTypeDocumentPassenger);
+        By byOptionTypeDocPassenger = By.xpath("//li[@data-testid='menu-item']");
+        List<WebElement> optionTypeDocumentPassenger = driver.findElements(byOptionTypeDocPassenger);
+        clickElementByJavaScript(optionTypeDocumentPassenger.get(0));
+        sendKeysToElementVisible(inputTypeDocumentPassenger,documentType);
     }
 
-    public void completeFormPassenger2(String gender, String name, String surName, String day, String month, String years, String documentType) throws InterruptedException {
-        formPassengerData.completeInputGenderPassenger2(gender);
-        formPassengerData.completeInputNamePassenger2(name);
-        formPassengerData.completeInputSurNamePassenger2(surName);
-        formPassengerData.completeInputDayPassenger2(day);
-        formPassengerData.completeInputMonthPassenger2(month);
-        formPassengerData.completeInputYearsPassenger2(years);
-        formPassengerData.completeInputDocumentType2(documentType);
-    }
 
     public void completeFormPaymentData(String numberCard, String month, String year, String CVV, String cardHolder){
         formPaymentData.insertNumberOfCreditCard(numberCard);
