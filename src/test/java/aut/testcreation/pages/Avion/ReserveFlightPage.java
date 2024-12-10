@@ -38,7 +38,7 @@ public class ReserveFlightPage extends ReserveHotelPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void fillFlightForm (String variable, String nom_, String ape_, String dia_, String mes_, String anio_){
+    public void fillFlightForm (String variable, String nom_, String ape_, String dia_, String mes_, String anio_, String tc){
         By byName = By.xpath("//input[@name='groups.1.travellers." + variable + ".name']");
         By bySurName = By.xpath("//input[@name='groups.1.travellers." + variable + ".surname']");
         By bySr_a = By.xpath("//input[@name='groups.1.travellers." + variable + ".title' and @value='MALE']");
@@ -46,7 +46,6 @@ public class ReserveFlightPage extends ReserveHotelPage {
         By byMonthBirth = By.xpath("//button[@data-testid='groups.1.travellers." + variable + ".dateOfBirth_month']");
         By byYearBirth = By.xpath("//div[@data-testid='groups.1.travellers." + variable + ".dateOfBirth_year']//input[@name='groups.1.travellers." + variable + ".dateOfBirth']");
         By byMaletaIda = By.xpath("//div[@data-testid='traveller-container-1-" + variable + "-1-ADT_1']//div[text()='Sin maleta facturada']");
-        //By byMaletaVuelta = By.xpath("//div[@data-testid='traveller-container-1-" + variable +"-2-ADT_2']//div[text()='Sin maleta facturada']");
 
         WebElement nombre = findElement(byName);
         WebElement apellido = findElement(bySurName);
@@ -55,7 +54,6 @@ public class ReserveFlightPage extends ReserveHotelPage {
         WebElement mes = findElement(byMonthBirth);
         WebElement anio = findElement(byYearBirth);
         WebElement maletaIda = findElement(byMaletaIda);
-        //WebElement maletaVuelta = findElement(byMaletaVuelta);
 
         sendKeysToElementVisible(nombre, nom_);
         sendKeysToElementVisible(apellido, ape_);
@@ -67,7 +65,12 @@ public class ReserveFlightPage extends ReserveHotelPage {
         sendKeysToElementVisible(anio, anio_);
         clickElementByJavaScript(BtnSeguro);
         clickElementByJavaScript(maletaIda);
-        //clickElementByJavaScript(maletaVuelta);
+
+        if (tc.equalsIgnoreCase("5")){
+            By byMaletaVuelta = By.xpath("//div[@data-testid='traveller-container-1-" + variable +"-2-ADT_2']//div[text()='Sin maleta facturada']");
+            WebElement maletaVuelta = findElement(byMaletaVuelta);
+            clickElementByJavaScript(maletaVuelta);
+        }
 
     }
 

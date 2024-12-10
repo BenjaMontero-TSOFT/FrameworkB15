@@ -143,8 +143,8 @@ public class TestVuelos extends SeleniumTestBase {
 
         //Formulario
         reserveFlight.completeFormContact( dataSet.get(1), dataSet.get(2), dataSet.get(3), dataSet.get(4), dataSet.get(5));
-        reserveFlight.fillFlightForm(dataSet.get(6), dataSet.get(7), dataSet.get(8), dataSet.get(9), dataSet.get(10), dataSet.get(11));
-        reserveFlight.fillFlightForm(dataSet.get(12), dataSet.get(13), dataSet.get(14), dataSet.get(15), dataSet.get(16), dataSet.get(17));
+        reserveFlight.fillFlightForm(dataSet.get(6), dataSet.get(7), dataSet.get(8), dataSet.get(9), dataSet.get(10), dataSet.get(11), dataSet.get(27));
+        reserveFlight.fillFlightForm(dataSet.get(12), dataSet.get(13), dataSet.get(14), dataSet.get(15), dataSet.get(16), dataSet.get(17), dataSet.get(27));
         reserveFlight.fillAddressData(dataSet.get(18), dataSet.get(19), dataSet.get(20), dataSet.get(21));
         reserveFlight.siguiente();
         //Asientos y datos de pago
@@ -185,10 +185,10 @@ public class TestVuelos extends SeleniumTestBase {
         fee.selectExtraPackFee();
         reserveFlight.completeFormContact(dataSet.get(3), dataSet.get(4), dataSet.get(5), dataSet.get(6), dataSet.get(7));
         Thread.sleep(1000);
-        reserveFlight.fillFlightForm(dataSet.get(8), dataSet.get(9), dataSet.get(10), dataSet.get(11), "", dataSet.get(12));
+        reserveFlight.fillFlightForm(dataSet.get(8), dataSet.get(9), dataSet.get(10), dataSet.get(11), "", dataSet.get(12), dataSet.get(13));
         reserveFlight.siguiente();
 
-        Assertions.assertEquals(dataSet.get(13), reserveFlight.getNameError());
+        Assertions.assertEquals(dataSet.get(14), reserveFlight.getNameError());
 
     }
 
