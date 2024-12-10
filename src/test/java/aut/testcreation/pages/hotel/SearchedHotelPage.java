@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchedHotelPage extends SeleniumWrapper {
@@ -29,8 +30,9 @@ public class SearchedHotelPage extends SeleniumWrapper {
     @FindBy (xpath = "//div[@id='openx-ui-search']")
     private WebElement research;
 
-    @FindBy (xpath = "//div[text()='Buscar otras fechas']")
-    private WebElement changeDatesBtn;
+    //@FindBy (xpath = "//div[text()='Buscar otras fechas']")
+    @FindBy (xpath = "//div[@role='button']//span")
+    private List<WebElement> changeDatesBtn;
 
     public SearchedHotelPage(WebDriver driver) {
         super(driver);
@@ -45,8 +47,9 @@ public class SearchedHotelPage extends SeleniumWrapper {
         return Double.valueOf(number);
     }
 
-    public void goToFirstResult(){
+    public void goToFirstResult() throws InterruptedException {
         WebElement firsResult = this.resultsOfSearched.get(0);
+        Thread.sleep(1000);
         this.clickToElementClickable(firsResult);
         this.switchTab();
     }
@@ -66,13 +69,34 @@ public class SearchedHotelPage extends SeleniumWrapper {
         return false;
     }
 
-    public void changeDates(String fechaIda, String fechaVuelta){
-        clickToElementClickable(changeDatesBtn); //este boton no existe o no lo econtre
-        //div[@role='button'] 1 de 5
+    public void changeDates(String fechaViejaIda, String fechaViejaVuelta, String fechaIda, String fechaVuelta) throws InterruptedException {
+        //clickToElementClickable(changeDatesBtn); //este boton no existe o no lo econtre
 
         //se podria iterar esos botones, obtener el texto y compararlo con las fechas q ingresaste primero
+        String text;
+        String newText;
+        for (WebElement boton : changeDatesBtn){
+            Thread.sleep(1000);
+            text = getTextByElement(boton);
+            newText = extractNumbersAndDashes(text);
+            System.out.println(text);
+            System.out.println(newText);
 
-        //ej 9 dic - 19 dic, pedirle a chat gpt, que te haga un metodo, que en base a ese string, elimine todo
+            if (newText.equals(fechaViejaIda + "-" + fechaViejaVuelta)){
+                Thread.sleep(2000);
+                clickToElementClickable(boton);
+
+                By byIda = By.xpath("//div[@data-date='2024-12-" + fechaIda + "']");
+                Thread.sleep(1000);
+                By byVuelta = By.xpath("//div[@data-date='2024-12-" + fechaVuelta + "']");
+                click(byIda);
+                click(byVuelta);
+                clickElementByJavaScript(research);
+                break;
+            }
+        }
+
+        /*//ej 9 dic - 19 dic, pedirle a chat gpt, que te haga un metodo, que en base a ese string, elimine todo
         //lo que no sea un numero pero que deje el - -> entonces quedaria 9-19
 
         //text = getTextByElement() obtenes el texto del elemento
@@ -89,7 +113,11 @@ public class SearchedHotelPage extends SeleniumWrapper {
         By byVuelta = By.xpath("//div[@data-date='2024-12-" + fechaVuelta + "']");
         click(byIda);
         click(byVuelta);
-        clickToElementClickable(research);
+        clickToElementClickable(research);*/
+    }
+
+    public String extractNumbersAndDashes(String input) {
+        return input.replaceAll("[^0-9-]", "");
     }
 
 }

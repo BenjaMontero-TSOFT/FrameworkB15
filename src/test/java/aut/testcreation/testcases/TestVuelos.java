@@ -98,7 +98,7 @@ public class TestVuelos extends SeleniumTestBase {
         searchAvion.addHotel();
         searchAvion.clickBuscar();
         Thread.sleep(1000);
-        hoteles.changeDates("13", "20");
+        hoteles.changeDates(dataSet.get(4), dataSet.get(5), dataSet.get(6), dataSet.get(7));
     }
 
     @Test
@@ -148,7 +148,7 @@ public class TestVuelos extends SeleniumTestBase {
 
     @Test
     @DisplayName("TC-V06")
-    public void reservaIdaVuelta_Hotel_granCanaria(){
+    public void reservaIdaVuelta_Hotel_granCanaria() throws InterruptedException {
         driver.get("https://www.rumbo.es/");
         this.homePage = new HomePage(this.driver);
         this.navBar = new NavBarHomePage(this.driver);
