@@ -35,6 +35,7 @@ public class TestVuelos extends SeleniumTestBase {
         this.homePage = new HomePage(this.driver);
         Thread.sleep(2000);
         this.homePage.closeCookies();
+        this.fee = new Fee(this.driver);
 
         searchAvion = new SearchNavigationAvion(this.driver);
         resultadosVuelos = new FlightResultsPage(this.driver);
@@ -42,6 +43,8 @@ public class TestVuelos extends SeleniumTestBase {
         searchAvion.fillFlightSearch_Ida(dataSet.get(1), dataSet.get(2), dataSet.get(3), dataSet.get(4), Integer.parseInt(dataSet.get(5)));
         searchAvion.clickBuscar();
         resultadosVuelos.selectFlight();
+
+        Assertions.assertTrue(fee.getResult());
     }
 
     @Test
@@ -55,6 +58,8 @@ public class TestVuelos extends SeleniumTestBase {
         searchAvion = new SearchNavigationAvion(this.driver);
         searchAvion.fillFlightSearch_IdaVuelta_Hotel(dataSet.get(1), dataSet.get(2), dataSet.get(3), dataSet.get(4), dataSet.get(5));
         searchAvion.AmountOfBabysWrong(dataSet.get(6));
+
+        Assertions.assertEquals(dataSet.get(7), searchAvion.getErrorMsg());
 
     }
 
@@ -73,15 +78,18 @@ public class TestVuelos extends SeleniumTestBase {
         searchAvion = new SearchNavigationAvion(this.driver);
         searchAvion.fillFlightSearch_IdaVuelta_Hotel(dataSet.get(1), dataSet.get(2), dataSet.get(3), dataSet.get(4), dataSet.get(5));
         searchAvion.addHotel();
+        Thread.sleep(1000);
         searchAvion.clickBuscar();
 
         hotelFiltro.StarsFilter();
         Thread.sleep(1000);
 
         hoteles.goToFirstResult();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
 
         infoHotel.changeFlight();
+
+        Assertions.assertEquals(dataSet.get(6), infoHotel.getMejorOferta());
 
     }
 
@@ -99,6 +107,8 @@ public class TestVuelos extends SeleniumTestBase {
         searchAvion.clickBuscar();
         Thread.sleep(1000);
         hoteles.changeDates(dataSet.get(4), dataSet.get(5), dataSet.get(6), dataSet.get(7));
+
+        Assertions.assertTrue(hoteles.getResultSize()!=0);
     }
 
     @Test
@@ -140,10 +150,11 @@ public class TestVuelos extends SeleniumTestBase {
         //Asientos y datos de pago
         seatReservation.seatAdvice();
         seatReservation.skipStep();
+        Thread.sleep(1000);
         seatReservation.goToPaymentPage();
         reserveFlight.completeFormPayment(dataSet.get(22), dataSet.get(23), dataSet.get(24), dataSet.get(25));
         String messageError = this.reserveFlight.getMessageCvvError();
-        Assertions.assertEquals(messageError, dataSet.get(26));
+        Assertions.assertEquals(dataSet.get(26), messageError);
     }
 
     @Test
@@ -166,12 +177,18 @@ public class TestVuelos extends SeleniumTestBase {
         searchAvion.selectDatesGC(dataSet.get(1), dataSet.get(2));
         searchAvion.clickBuscarGranCanaria();
         hotelFiltro.StarsFilter();
+        Thread.sleep(5000);
         hoteles.goToFirstResult();
         infoHotel.goToReserve();
+        Thread.sleep(2000);
         infoHotel.continueToReserveToFirstOption();
         fee.selectExtraPackFee();
         reserveFlight.completeFormContact(dataSet.get(3), dataSet.get(4), dataSet.get(5), dataSet.get(6), dataSet.get(7));
+        Thread.sleep(1000);
         reserveFlight.fillFlightForm(dataSet.get(8), dataSet.get(9), dataSet.get(10), dataSet.get(11), "", dataSet.get(12));
+        reserveFlight.siguiente();
+
+        Assertions.assertEquals(dataSet.get(13), reserveFlight.getNameError());
 
     }
 

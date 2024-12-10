@@ -37,7 +37,7 @@ public class SeleniumTestBase {
 
     @AfterEach
     void close(){
-        driver.quit();
+    //    driver.quit();
     }
 
 }

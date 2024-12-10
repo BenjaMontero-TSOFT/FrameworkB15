@@ -14,11 +14,17 @@ public class InformationHotelPage extends SeleniumWrapper {
     @FindBy (xpath = "//button[@data-test-id='book-cta']")
     private WebElement btnNavigateToReserve;
 
+    @FindBy (xpath = "//div[text()='Esta es nuestra mejor oferta entre 789 opciones.']")
+    private WebElement mejorOferta;
+
     @FindBy(xpath = "//div[@id='rooms']//button[@data-testid='checkout-button']")
     private List<WebElement> btnContinueToReserve;
 
     @FindBy (xpath = "//div[@aria-label='go to change flight']")
     private WebElement BtnChangeFlight;
+
+    @FindBy (xpath = "//button[text()='Modificar']")
+    private WebElement modificar;
 
     @FindBy (xpath = "//button[@data-testid='lmn-ds-btn' and contains(text(), 'Seleccionar este vuelo')]")
     private WebElement BtnSelectNewFlight;
@@ -36,12 +42,13 @@ public class InformationHotelPage extends SeleniumWrapper {
         continueToReserveToFirstOption();
     }
 
-    public void changeFlight(){
+    public void changeFlight() throws InterruptedException {
         this.clickElementByJavaScript(this.btnNavigateToReserve);
         clickToElementClickable(BtnChangeFlight);
         By byCheaper = By.xpath("//div[text()='Más barato']");
         click(byCheaper);
-        clickToElementClickable(BtnSelectNewFlight);
+        Thread.sleep(1000);
+        clickElementByJavaScript(BtnSelectNewFlight);
     }
 
     //clickeo la primer opcion
@@ -50,5 +57,9 @@ public class InformationHotelPage extends SeleniumWrapper {
             this.clickToElementClickable(webElement);
             break;
         }
+    }
+
+    public String getMejorOferta(){
+        return getTextByElement(mejorOferta);
     }
 }
