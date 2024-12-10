@@ -166,6 +166,7 @@ public class TestVuelos extends SeleniumTestBase {
         searchAvion.selectDatesGC(dataSet.get(1), dataSet.get(2));
         searchAvion.clickBuscarGranCanaria();
         hotelFiltro.StarsFilter();
+        Thread.sleep(5000);
         hoteles.goToFirstResult();
         infoHotel.goToReserve();
         infoHotel.continueToReserveToFirstOption();

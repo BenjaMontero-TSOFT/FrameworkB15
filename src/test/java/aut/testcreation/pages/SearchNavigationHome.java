@@ -26,9 +26,8 @@ public class SearchNavigationHome extends SeleniumWrapper {
     @FindBy(xpath = "//div[@class='d-b1sfx4']/*[3]//button[@tabindex='-1']")
     private List<WebElement> btnsSecondDates;
 
-    @FindBy(xpath = "//form[@aria-label='Hoteles']/div/div[3]")
+    @FindBy(xpath = "//form[@aria-label='Hoteles']//span[text()='Personas']")
     private WebElement btnPersonsToRoom;
-    //TODO: Revisar xpath domingo
 
     @FindBy(xpath = "//Button[@aria-label='Aumentar el número de adultos']")
     protected WebElement btnUploadQuantityOfAdults;
